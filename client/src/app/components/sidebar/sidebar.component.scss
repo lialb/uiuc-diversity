@@ -1,3 +1,5 @@
+$UIUCOrange: #E84A26;
+$UIUCBlue: #13294A;
 /* The sidebar menu */
 .sidebar {
   height: 100%; /* 100% Full-height */
@@ -6,26 +8,10 @@
   z-index: 1; /* Stay on top */
   top: 0;
   left: 0;
-  // background-color: #25266E;
-  background-color: #CAEBF2;
+  background-color: $UIUCBlue;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-}
-
-/* The sidebar links */
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */
@@ -62,11 +48,12 @@
 }
 
 $skyblue: #328CC1;
+
 .college-button {
   background-color: transparent; /* Green */
   border: none;
-  color: $skyblue;
-  border-color: $skyblue;
+  color: $UIUCOrange;
+  border-color: $UIUCOrange;
   padding: 10px 16px 10px 16px;
   text-align: center;
   text-decoration: none;
@@ -80,5 +67,5 @@ $skyblue: #328CC1;
 }
 
 .college-button:hover {
-  color: #383050;
+  color: #FFD125;
 }
