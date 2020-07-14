@@ -1,0 +1,64 @@
+{
+    "colleges" : [
+        {
+            "abbreviation" : "ACES",
+            "name" : "AG, Consumer, and Env. Sci."
+        },
+        {
+            "abbreviation" : "AHS",
+            "name" : "Applied Health Sciences"
+        },
+        {
+            "abbreviation" : "BUS",
+            "name" : "Gies College of Business"
+        },
+        {
+            "abbreviation" : "DGS",
+            "name" : "Division of General Studies"
+        },
+        {
+            "abbreviation" : "EDUC",
+            "name" : "College of Education"
+        },
+        {
+            "abbreviation" : "ENGR",
+            "name" : "Grainger College of Engr."
+        },
+        {
+            "abbreviation" : "FAA",
+            "name" : "Fine and Applied Arts"
+        },
+        {
+            "abbreviation" : "GRAD",
+            "name" : "Graduate College"
+        },
+        {
+            "abbreviation" : "LAW",
+            "name" : "College of Law"
+        },
+        {
+            "abbreviation" : "LAS",
+            "name" : "Liberal Arts and Sciences"
+        },
+        {
+            "abbreviation" : "MEDIA",
+            "name" : "College of Media"
+        },
+        {
+            "abbreviation" : "MED",
+            "name" : "Carle College of Medicine"
+        },
+        {
+            "abbreviation" : "IS",
+            "name" : "School of Information Sciences"
+        },
+        {
+            "abbreviation" : "SW",
+            "name" : "School of Social Work"
+        },
+        {
+            "abbreviation" : "VM",
+            "name" : "College of Veterinary Medicine"
+        }
+    ]
+}

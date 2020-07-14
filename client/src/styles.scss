@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+$body-bg: #EFEFEF; // Carbon
+$body-color: #1D2731; // Ivory Black
+$theme-colors: (
+    "primary": #328CC1,
+    "secondary": #0B3C5D
+);
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+@import "node_modules/bootstrap/scss/bootstrap";
