@@ -1,1 +1,12 @@
-<p>about works!</p>
+<div style="text-align: center;">
+  <h1>About</h1>
+  <div>
+    <p>This project was made by two UIUC students who were heavily inspired by Professor Wade's visualizations</p>
+  </div>
+</div>
+
+<div class="cards">
+  <div *ngFor="let person of staff" class="people">
+      <app-person [name]="person.name" [picture]="person.picture" [github]="person.github" [linkedin]="person.linkedin" [website]="person.website" class="people"></app-person>
+  </div>
+</div>
