@@ -1,4 +1,5 @@
+<h1>{{ collegeAbbreviation }} - {{ collegeDescription }}</h1>
+<h1>College Code: {{ collegeCode }}</h1>
+<button (click)="createPieChart(5318, true)"></button>
+<app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
 
-  <h1>{{ collegeAbbreviation }} - {{ collegeDescription }}</h1>
-  <svg class="canvas">
-  </svg>

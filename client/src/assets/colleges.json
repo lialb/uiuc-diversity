@@ -2,62 +2,77 @@
     "colleges" : [
         {
             "abbreviation" : "ACES",
+            "code" : "KL",
             "name" : "AG, Consumer, and Env. Sci."
         },
         {
             "abbreviation" : "AHS",
+            "code" : "KY",
             "name" : "Applied Health Sciences"
         },
         {
             "abbreviation" : "BUS",
+            "code" : "KM",
             "name" : "Gies College of Business"
         },
         {
             "abbreviation" : "DGS",
+            "code" : "KW",
             "name" : "Division of General Studies"
         },
         {
             "abbreviation" : "EDUC",
+            "code" : "KN",
             "name" : "College of Education"
         },
         {
             "abbreviation" : "ENGR",
+            "code" : "KP",
             "name" : "Grainger College of Engr."
         },
         {
             "abbreviation" : "FAA",
+            "code" : "KR",
             "name" : "Fine and Applied Arts"
         },
         {
             "abbreviation" : "GRAD",
+            "code" : "KS",
             "name" : "Graduate College"
         },
         {
             "abbreviation" : "LAW",
+            "code" : "KU",
             "name" : "College of Law"
         },
         {
             "abbreviation" : "LAS",
+            "code" : "KV",
             "name" : "Liberal Arts and Sciences"
         },
         {
             "abbreviation" : "MEDIA",
+            "code" : "KT",
             "name" : "College of Media"
         },
         {
             "abbreviation" : "MED",
+            "code" : "LB",
             "name" : "Carle College of Medicine"
         },
         {
             "abbreviation" : "IS",
+            "code" : "LP",
             "name" : "School of Information Sciences"
         },
         {
             "abbreviation" : "SW",
+            "code" : "LL",
             "name" : "School of Social Work"
         },
         {
             "abbreviation" : "VM",
+            "code" : "LC",
             "name" : "College of Veterinary Medicine"
         }
     ]

@@ -7,6 +7,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CollegeComponent } from './pages/college/college.component';
+import { PiechartComponent } from './components/piechart/piechart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
     AboutComponent,
     SidebarComponent,
     HomeComponent,
-    CollegeComponent
+    CollegeComponent,
+    PiechartComponent
   ],
   imports: [
     BrowserModule,
