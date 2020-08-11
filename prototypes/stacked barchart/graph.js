@@ -34,20 +34,20 @@ const hideIt = () => {
 }
 
 d3.csv("./data.csv").then(data => {
-  
+  console.log(data)
   const keys = data.columns.slice(1);
   y.domain(data.map(entry => entry.major));
   x.domain([0, 200]);
   z.domain(keys)
   const stack = d3.stack().keys(keys);
   const stackedData = stack(data)
-  console.log(stackedData)
+//   console.log(stackedData)
   graph.call(tip)
   let bargroups = graph.selectAll("g").data(stackedData)
                          .enter()
                         .append("g")
                         .attr("fill", d => {
-                            console.log(d)
+                            // console.log(d)
                             return z(d.key)})
 
   let rects = bargroups.selectAll('rect')
