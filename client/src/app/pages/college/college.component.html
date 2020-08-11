@@ -12,6 +12,9 @@
     <li class="nav-item">
       <a [class]="'nav-link' + (level === 'doctorate' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'doctorate']">Doctorate</a>
     </li>
+    <li class="nav-item">
+      <a [class]="'nav-link' + (level === 'nondegree' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'nondegree']">Non-Degree</a>
+    </li>
   </ul>
   <br>
 
@@ -37,9 +40,7 @@
       <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
     </div>
     <p *ngIf="level === 'masters'">Note: Masters (e.g. MS, MCS, MEng) are combined in each major</p>
-    <p *ngIf="level === 'undergrad'">Note: Engineering Undeclared is a program only for freshman. Chemical Engineering is in LAS</p>
-
-
+    <p *ngIf="level === 'nondegree'">Note: NonDegree students can include undergraduate programs that transfer to a degree-seeking program (e.g. Engineering Undeclared -> Mechanical Engineering) and students taking undergraduate courses for credit at another institution (may include high school).</p>
 </div>
 
 

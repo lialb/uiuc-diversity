@@ -60,7 +60,16 @@ export class CollegeComponent implements OnInit {
   }
 
   initGraph() {
-    const majorArray = this.level === 'undergrad' ? data['default'][this.collegeCode].undergradTotal : this.level === 'masters' ? data['default'][this.collegeCode].mastersTotal : data['default'][this.collegeCode].doctorateTotal;
+    let majorArray;
+    if (this.level === 'undergrad') {
+      majorArray = data['default'][this.collegeCode].undergradTotal;
+    } else if (this.level === 'masters') {
+      majorArray = data['default'][this.collegeCode].mastersTotal;
+    } else if (this.level === 'doctorate') {
+      majorArray = data['default'][this.collegeCode].doctorateTotal;
+    } else {
+      majorArray = data['default'][this.collegeCode].nondegreeTotal;
+    }
 
     majorArray.sort((a, b) => b.total - a.total)
     const svg = d3.select('.canvas');

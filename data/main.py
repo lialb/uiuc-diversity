@@ -33,6 +33,7 @@ def getDegrees():
     undergrad = set()
     masters = set()
     doctorate = set()
+    nondegree = set()
     with open('./cleanData/2019.csv') as f:
         r = csv.reader(f)
         next(r)
@@ -40,17 +41,19 @@ def getDegrees():
             degree = row[3].strip()
             if degree == '':
                 continue
-            if degree[0] == 'B' or degree == 'NONE' or degree == 'NDEG':
+            if degree[0] == 'B':
                 undergrad.add(degree)
+            elif degree == 'NONE' or degree == 'NDEG':
+                nondegree.add(degree)
             elif degree[-1] == 'D':
                 doctorate.add(degree)
             else:
                 masters.add(degree)
-        return undergrad, masters, doctorate
+        return undergrad, masters, doctorate, nondegree
 print(getDegrees())
 
 
-undergradDegrees, mastersDegrees, doctorateDegrees = getDegrees()
+undergradDegrees, mastersDegrees, doctorateDegrees, nondegrees = getDegrees()
 
 colleges = ['KL', 'KM', 'KN', 'KP', 'KR', 'KS', 'KT', 'KU',
             'KV', 'KW', 'KY', 'LC', 'LG', 'LL', 'LN', 'LP', 'LT', 'NB']
@@ -60,7 +63,7 @@ colleges = ['KL', 'KM', 'KN', 'KP', 'KR', 'KS', 'KT', 'KU',
 def getCollegeData(year, document):
     data = {}
     for college in colleges:
-        data[college] = {'undergraduate': [], 'masters': [], 'doctorate': [], 'undergradTotal' : [], 'mastersTotal': [], 'doctorateTotal': []}
+        data[college] = {'undergraduate': [], 'masters': [], 'doctorate': [], 'nondegree': [], 'undergradTotal' : [], 'mastersTotal': [], 'doctorateTotal': [], 'nondegreeTotal': []}
 
     with open('./cleanData/' + document + '.csv') as f:
         r = csv.reader(f)
@@ -103,6 +106,16 @@ def getCollegeData(year, document):
                     data[collegeCode]['doctorateTotal'][-1][races[i]] += count
                 data[collegeCode]['doctorateTotal'][-1]['total'] += total
                 continue
+            elif len(data[collegeCode]['nondegree']) > 0 and majorCode == data[collegeCode]['nondegree'][-1]['majorCode'] and degree in nondegrees:
+                total = int(row[8])
+                for i in range(len(races)):
+                    count = int(row[12 + i])
+                    data[collegeCode]['nondegree'][-9 + i]['count'] += count
+                    data[collegeCode]['nondegree'][-9 + i]['total'] += total
+                    data[collegeCode]['nondegreeTotal'][-1][races[i]] += count
+                data[collegeCode]['nondegreeTotal'][-1]['total'] += total
+                continue
+
             # if it is a new major, add it
             total = {'major': major, 'degree': degree, 'college' : collegeCode, 'majorCode': majorCode, 'year': year, 'total': int(row[8])}
             for i in range(len(races)):
@@ -112,16 +125,20 @@ def getCollegeData(year, document):
                     data[collegeCode]['undergraduate'].append(temp)
                 elif degree in mastersDegrees:
                     data[collegeCode]['masters'].append(temp)
-                else:
+                elif degree in doctorateDegrees:
                     data[collegeCode]['doctorate'].append(temp)
+                else:
+                    data[collegeCode]['nondegree'].append(temp)
                 total[races[i]] = count
 
             if degree in undergradDegrees:
                 data[collegeCode]['undergradTotal'].append(total)
             elif degree in mastersDegrees:
                 data[collegeCode]['mastersTotal'].append(total)
-            else:
+            elif degree in doctorateDegrees:
                 data[collegeCode]['doctorateTotal'].append(total)
+            else:
+                data[collegeCode]['nondegreeTotal'].append(total)
     # print(data)
     writeToJSON(data, document)
                 
