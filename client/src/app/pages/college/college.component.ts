@@ -30,6 +30,7 @@ export class CollegeComponent implements OnInit {
   collegeCode: string = '';
   showPieChart = false;
   majorData: any = {};
+  undergrad = true;
 
   graphMargin: margins = {
     left: 200,
@@ -48,13 +49,20 @@ export class CollegeComponent implements OnInit {
   ngOnInit() {
     this.ar.paramMap.subscribe(params => {
       this.collegeAbbreviation = params.get('college');
+      this.undergrad = params.get('level') === 'undergrad';
     });
+
     this.selectedCollege = this.collegeData.find(college => college['abbreviation'] === this.collegeAbbreviation);
     this.collegeDescription = this.selectedCollege.name; // Example: College of Education
     this.collegeCode = this.selectedCollege.code; // Example: 'KP' for Grainger
-    const majorArray = data['default'][this.collegeCode].undergradTotal;
-    majorArray.sort((a, b) => b.total - a.total)
 
+    this.initGraph();
+  }
+
+  initGraph() {
+    const majorArray = this.undergrad ? data['default'][this.collegeCode].undergradTotal : data['default'][this.collegeCode].graduateTotal;
+
+    majorArray.sort((a, b) => b.total - a.total)
     const svg = d3.select('.canvas');
 
     //the main group where everything is drawn
@@ -218,13 +226,7 @@ export class CollegeComponent implements OnInit {
             .style("text-anchor", "end")
             .attr("transform", "rotate(-40)");
     }
-      
-  
-
-    
-
   }
-
 
   // createPieChart(majorCode: number, isUndergrad: boolean) {
   //   this.showPieChart = true;

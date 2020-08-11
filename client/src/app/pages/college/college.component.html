@@ -2,25 +2,41 @@
 <h1>College Code: {{ collegeCode }}</h1>
 <!-- <button (click)="createPieChart(5318, true)"></button> -->
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12">
-      <svg class="legend" style="width: 100%; height: 50px">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a [class]="'nav-link' + (undergrad ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
+    </li>
+    <li class="nav-item">
+      <a [class]="'nav-link' + (undergrad ? '' : ' active')" [routerLink]="['/college', collegeAbbreviation, 'graduate']">Graduate</a>
+    </li>
+  </ul>
+  <br>
 
-      </svg>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-12">
-      <svg class="canvas" style="width: 102%; height: 1000px">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <svg class="legend" style="width: 100%; height: 50px">
 
-      </svg>
+        </svg>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
+
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <svg class="canvas" style="width: 102%; height: 1000px">
+
+        </svg>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
+      </div>
       <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
     </div>
-    <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
-  </div>
+    <p *ngIf="!undergrad">Note: Masters (e.g. MS, MCS, MEng) and PhD programs are combined in each major</p>
+    <p *ngIf="undergrad">Note: Engineering Undeclared is a program only for freshman. Chemical Engineering is in LAS</p>
+
+
 </div>
+
 

@@ -14,7 +14,7 @@ import { PersonComponent } from './components/person/person.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'college/:college', component: CollegeComponent }
+  { path: 'college/:college/:level', component: CollegeComponent }
 ];
 
 @NgModule({
