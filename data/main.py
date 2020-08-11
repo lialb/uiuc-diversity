@@ -37,13 +37,14 @@ def getDegrees():
         next(r)
         for row in r:
             degree = row[3].strip()
-            if degree == '':
+            if degree == '' or degree == 'NDEG':
                 continue
-            if degree[0] == 'B':
+            if degree[0] == 'B' or degree == 'NONE':
                 undergrad.add(degree)
             else:
                 graduate.add(degree)
         return undergrad, graduate
+print(getDegrees())
 
 
 undergradDegrees, graduateDegrees = getDegrees()
@@ -70,7 +71,7 @@ def getCollegeData(year, document):
             major = row[5].strip()
             degree = row[3].strip()
 
-            if len(data[collegeCode]['undergraduate']) > 0 and majorCode == data[collegeCode]['undergraduate'][-1]['majorCode']: # Check if same major code, different concentration
+            if len(data[collegeCode]['undergraduate']) > 0 and majorCode == data[collegeCode]['undergraduate'][-1]['majorCode'] and degree in undergradDegrees: # Check if same major code, different concentration
                 total = int(row[8])
                 for i in range(len(races)):
                     count = int(row[12 + i])
@@ -79,7 +80,7 @@ def getCollegeData(year, document):
                     data[collegeCode]['undergradTotal'][-1][races[i]] += count # For total in one major
                 data[collegeCode]['undergradTotal'][-1]['total'] += total # update totals
                 continue
-            elif len(data[collegeCode]['graduate']) > 0 and majorCode == data[collegeCode]['graduate'][-1]['majorCode']:
+            elif len(data[collegeCode]['graduate']) > 0 and majorCode == data[collegeCode]['graduate'][-1]['majorCode'] and degree in graduateDegrees:
                 total = int(row[8])
                 for i in range(len(races)):
                     count = int(row[12 + i])
@@ -93,7 +94,7 @@ def getCollegeData(year, document):
             for i in range(len(races)):
                 count = int(row[12 + i])
                 temp = {'race': races[i], 'count' : count, 'total': int(row[8]), 'major': major, 'degree': degree, 'college' : collegeCode, 'majorCode': majorCode, 'year': year}
-                if temp['degree'] in undergradDegrees:
+                if temp['degree'].strip() in undergradDegrees:
                     data[collegeCode]['undergraduate'].append(temp)
                 else:
                     data[collegeCode]['graduate'].append(temp)

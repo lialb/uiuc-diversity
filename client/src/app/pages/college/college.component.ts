@@ -56,82 +56,95 @@ export class CollegeComponent implements OnInit {
     majorArray.sort((a, b) => b.total - a.total)
 
     const svg = d3.select('.canvas');
+
+    //the main group where everything is drawn
     const graph = svg.append("g")
                     //  .attr("transform", "translate(" + this.graphMargin.left + "," + this.graphMargin.top + ")");
                      .attr("transform", `translate(${this.graphMargin.left}, 0)`);
     
+
     // x, y, color, stack are all functions
-    let y: any;
+    let y: any;  // the length of the y-axis should be responsive to the number of majors, since the height of each bar is y.bandwidth(), 
+                 // if there is one major with such long axis, the height of this bar can be crazily big. The if-else can be rewritten in function tho
     if (majorArray.length > 20) {
       y = d3.scaleBand()	// scaleBand for categorical data		
-            .range([0, this.svgHeight - this.graphMargin.top - this.graphMargin.bottom])	// position of the canvas
+            .range([0, this.svgHeight - this.graphMargin.top - this.graphMargin.bottom])	// height of y-axis
             .domain(majorArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
-            .paddingInner(0.2)
-            .paddingOuter(0.2)
+            .paddingInner(0.2) // padding between each bar
+            .paddingOuter(0.2) // padding to x-axis
             .align(0.1);
     } else if (majorArray.length >= 8) {
-      y = d3.scaleBand()	// scaleBand for categorical data		
-            .range([0, 500 - this.graphMargin.top - this.graphMargin.bottom])	// position of the canvas
-            .domain(majorArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
+      y = d3.scaleBand()		
+            .range([0, 500 - this.graphMargin.top - this.graphMargin.bottom])	
+            .domain(majorArray.map(entry => entry.major))  
             .paddingInner(0.2)
             .paddingOuter(0.2)
             .align(0.1);
     } else if (majorArray.length >= 4) {
-      y = d3.scaleBand()	// scaleBand for categorical data		
-            .range([0, 300 - this.graphMargin.top - this.graphMargin.bottom])	// position of the canvas
-            .domain(majorArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
+      y = d3.scaleBand()		
+            .range([0, 300 - this.graphMargin.top - this.graphMargin.bottom])	
+            .domain(majorArray.map(entry => entry.major))  
             .paddingInner(0.2)
             .paddingOuter(0.2)
             .align(0.1);
     } else {
-      y = d3.scaleBand()	// scaleBand for categorical data		
-            .range([0, 100 - this.graphMargin.top - this.graphMargin.bottom])	// position of the canvas
-            .domain(majorArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
+      y = d3.scaleBand()		
+            .range([0, 100 - this.graphMargin.top - this.graphMargin.bottom])
+            .domain(majorArray.map(entry => entry.major))  
             .paddingInner(0.2)
             .paddingOuter(0.2)
             .align(0.1);
     }
 
-
     const x = d3.scaleLinear()		// scaleLinear for numerical data
                 .range([0, this.barRange])  //length of bar 
                 .domain([0, d3.max(majorArray, d => d.total)]);	// domain of the bar chart from 0 to the biggest total in one major
-              
-    const keys = Object.keys(majorArray[0]).slice(6) //keys required to make stacked bar chart, which is each race
+
+    // adding y-axis and x-axis, but they are not called yet, they are just created waiting to be called
+    const yAxis = d3.axisLeft(y) //put the text and ticks on the left of the y-axis
+                    .tickSize(0)
+                    .tickPadding(2);
+    const xAxis = d3.axisBottom(x)  //put the text and ticks on the bottom of the y-axis
+                    .tickSize(4)
+                    .ticks(1)
+                    .tickValues([0, d3.max(majorArray, d => d.total)])
+    
+    // color is a function
+    const keys = Object.keys(majorArray[0]).slice(6) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
     const color = d3.scaleOrdinal(d3['schemeSet3']).domain(keys);  //scaleOrdinal 9 colors for 9 races
 
-    // console.log(keys)
+    // config data
     const stack = d3.stack().keys(keys); //generate stacks
     const stackedData = stack(majorArray); // config the data to stacked data
 
-    const yAxis = d3.axisLeft(y) //put the text on the left of the y-axis
-                  .tickSize(0)
-                  .tickPadding(2);
-    
-    let bargroups = graph.selectAll("g").data(stackedData)
-                        .enter()
-                        .append("g")
-                        .attr("transform", `translate(5, 0)`)
-                        .attr("fill", d => color(d.key));
+    // creating the stacked barcharts column by column (or color by color)
+    let bargroups = graph.selectAll("g")
+                         .data(stackedData)
+                         .enter()
+                          .append("g") // adding groups vertically(column by column)
+                          .attr("transform", `translate(5, 0)`)
+                          // d can be replaced by whatever naming, it is what looping through the stackedData, so there are 9 d in total, since 9 races
+                          .attr("fill", d => color(d.key)) //sample d: {0: [0,286], 1: [0, 255], 2: [0, 211], ..., key: "Caucasian"}
+                                                           // get color for this race
 
     let rects = bargroups.selectAll('rect')
-                          .data(d => d)
+                          .data(d => d)  // super tricky here, it still loops 9 times 
                           .enter().append("rect")
-                          .attr("y", d => y(d.data.major))	    
-                          .attr("x", d => x(d[0]))
-                          .attr("width", d => x(d[1]) - x(d[0]))
-                          .attr("height", y.bandwidth())
-    
-    const legendGroup = svg.append('g').attr('transform', `translate(30, 100)`);
-  
-    const legend = legendColor()
-      // .shape('path', d3.symbol().type(d3.symbolCircle)())
-      .shapePadding(80)
-      .orient("horizontal")
-      .scale(color);
+                            .attr("y", d => y(d.data.major)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
+                            .attr("x", d => x(d[0])) // the coordinate where this rect starts
+                            .attr("width", d => x(d[1]) - x(d[0]))  // the length is decided by the starting points of adjacent two rects
+                            .attr("height", y.bandwidth()); // height is bandwidth, remember it is a function.
+                    
+    // the legend
+    const legendsvg = d3.select('.legend'); // another svg on top of the main svg
+    const legendGroup = legendsvg.append('g').attr('transform', `translate(200, 0)`);
+    // like x,y axis, legend is just created here, waiting to be called in a group
+    const legend = legendColor().shapePadding(90) //d3.legendColor() doesn't work for some reason, so had to install another dependency
+                                .orient("horizontal")
+                                .scale(color); 
 
-    legendGroup.call(legend);
-    legendGroup.selectAll('text')
+    legendGroup.call(legend); //call the legend
+    legendGroup.selectAll('text')  //configure the text
                .attr('fill', 'black')
                .attr('font-size', 12);
 
@@ -160,11 +173,52 @@ export class CollegeComponent implements OnInit {
     //   .attr('y', 10)
     //   .text(d => d.major);
 
+    // calling yAxis in the group 
     graph.append('g')
         //  .attr('transform', 'translate(-10,2)')
          .call(yAxis).selectAll('text')
          .attr('fill', 'black')
-         .attr('transform', 'translate(-5,0)')
+         .attr('transform', 'translate(-5,0)');
+    
+    // the same problem as above from line 69.
+    if (majorArray.length > 20) {
+      graph.append('g')
+            .attr('transform', `translate(5, ${this.svgHeight - this.graphMargin.top - this.graphMargin.bottom})`)
+            .call(xAxis)
+            .selectAll('text')
+            .attr('fill', 'black')
+            .attr('transform', 'translate(-5,0)')
+            .style("text-anchor", "end")
+            .attr("transform", "rotate(-40)");
+    } else if (majorArray.length >= 8) {
+      graph.append('g')
+            .attr('transform', `translate(5, ${500 - this.graphMargin.top - this.graphMargin.bottom})`)
+            .call(xAxis)
+            .selectAll('text')
+            .attr('fill', 'black')
+            .attr('transform', 'translate(-5,0)')
+            .style("text-anchor", "end")
+            .attr("transform", "rotate(-40)");
+    } else if (majorArray.length >= 4) {
+      graph.append('g')
+            .attr('transform', `translate(5, ${300 - this.graphMargin.top - this.graphMargin.bottom})`)
+            .call(xAxis)
+            .selectAll('text')
+            .attr('fill', 'black')
+            .attr('transform', 'translate(-5,0)')
+            .style("text-anchor", "end")
+            .attr("transform", "rotate(-40)");
+    } else {
+      graph.append('g')
+            .attr('transform', `translate(5, ${100 - this.graphMargin.top - this.graphMargin.bottom})`)
+            .call(xAxis)
+            .selectAll('text')
+            .attr('fill', 'black')
+            .attr('transform', 'translate(-5,0)')
+            .style("text-anchor", "end")
+            .attr("transform", "rotate(-40)");
+    }
+      
   
 
     
