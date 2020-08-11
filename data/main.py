@@ -67,6 +67,8 @@ def getCollegeData(year, document):
                 continue
             
             collegeCode = row[1].strip()
+            if collegeCode in ('LE', 'LM'): # For Institute of Aviation, Provost
+                continue
             majorCode = int(row[4])
             major = row[5].strip()
             degree = row[3].strip()
@@ -110,7 +112,10 @@ def getCollegeData(year, document):
 def writeToJSON(data, document):
     with open('./json/' + document + '.json', 'w') as json_file:
         json.dump(data, json_file)
-    print('Done writing to json file')
+    print('Done writing to json file:', document)
 
-# getSummaryData(2019, '2019Summary')
-getCollegeData(2019, '2019')
+year = 2016
+while year >= 2004:
+    getSummaryData(year, str(year) + 'Summary')
+    getCollegeData(year, str(year))
+    year -= 1

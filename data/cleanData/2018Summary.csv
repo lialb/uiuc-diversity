@@ -1,0 +1,31 @@
+Code,Name,Student level,Total,Men,Women,Unknown,Caucasian,Asian American,African American,Hispanic,Native American,Hawaiian/Pacific Isl,Multiracial,International,Unknown,All   African American,All    Native American,All Hawaiian/ Pac Isl,All Asian,Illinois,Non-Illinois,Part time,Full time
+KL ,"Agr, Cons, Env Sci ",Graduate ,679,289,390,0,362,22,15,35,0,0,9,230,6,16,4,0,32,253,426,132,547
+KL ,"Agr, Cons, Env Sci ",Undergraduate ,2629,1121,1505,3,1546,232,194,353,3,2,67,220,12,229,30,10,285,2264,365,92,2537
+KM ,Business ,Graduate ,3073,1840,1225,8,1225,506,151,191,2,3,41,699,255,182,21,5,664,846,2227,556,2517
+KM ,Business ,Undergraduate ,3140,1703,1435,2,1483,613,95,286,0,2,76,559,26,118,13,11,682,2288,852,29,3111
+KN ,Education ,Graduate ,1004,311,691,2,551,62,159,90,0,3,18,84,37,179,16,3,70,555,449,265,739
+KN ,Education ,Undergraduate ,608,75,532,1,384,59,31,97,0,1,21,14,1,45,8,2,69,572,36,6,602
+KP ,Engineering ,Graduate ,4229,3290,938,1,902,484,42,125,3,1,59,2415,198,63,24,6,681,483,3746,618,3611
+KP ,Engineering ,Undergraduate ,7234,5605,1627,2,2730,1954,110,493,3,7,264,1605,68,162,39,35,2194,4172,3062,249,6985
+KR ,Fine & Applied Arts ,Graduate ,801,367,433,1,349,46,27,54,0,0,18,303,4,45,12,1,55,206,595,95,706
+KR ,Fine & Applied Arts ,Undergraduate ,1678,757,920,1,811,217,119,228,0,2,65,229,7,148,24,12,269,1292,386,41,1637
+KS ,Graduate College ,Graduate ,60,37,23,0,26,4,2,0,0,0,1,21,6,3,0,0,4,21,39,20,40
+KT ,Media ,Graduate ,140,39,101,0,63,9,12,6,0,0,2,46,2,12,1,0,12,55,85,28,112
+KT ,Media ,Undergraduate ,993,353,640,0,596,83,71,108,1,0,37,90,7,88,8,5,108,852,141,19,974
+KU ,Law ,Graduate ,70,30,40,0,6,1,4,0,0,0,0,59,0,4,0,0,1,4,66,2,68
+KU ,Law ,Professional ,417,239,178,0,254,44,13,36,0,0,10,45,15,16,4,0,53,229,188,0,417
+KV ,Liberal Arts & Sci ,Graduate ,2500,1260,1240,0,912,133,50,190,1,1,67,1126,20,83,24,6,188,322,2178,99,2401
+KV ,Liberal Arts & Sci ,Undergraduate ,12035,6083,5948,4,4903,2306,804,1486,7,9,396,2072,52,986,113,76,2638,8976,3059,323,11712
+KW ,General Studies ,Undergraduate ,2962,1746,1215,1,1076,452,311,581,3,1,86,441,11,366,40,22,527,2423,539,8,2954
+KY ,Applied Health Sci ,Graduate ,321,109,211,1,180,20,26,21,1,0,9,60,4,30,5,0,25,156,165,29,292
+KY ,Applied Health Sci ,Undergraduate ,2038,676,1362,0,1080,294,242,301,0,3,78,37,3,291,17,14,350,1871,167,50,1988
+LC ,Veterinary Medicine ,Graduate ,82,23,59,0,46,6,1,2,0,0,3,23,1,3,1,0,8,20,62,10,72
+LC ,Veterinary Medicine ,Professional ,545,75,470,0,450,24,4,39,1,0,14,4,9,8,6,0,34,301,244,7,538
+LG ,Labor & Empl. Rel. ,Graduate ,251,74,177,0,101,20,30,18,0,0,7,74,1,33,1,0,25,135,116,2,249
+LL ,School of Social Work ,Graduate ,348,51,297,0,239,16,43,27,0,0,10,11,2,51,3,0,19,321,27,7,341
+LL ,School of Social Work ,Undergraduate ,259,35,224,0,144,17,21,61,0,1,12,3,0,31,6,1,20,249,10,6,253
+LN ,Center Innov in Teach Learn ,Graduate ,305,121,182,2,181,26,11,19,0,0,2,8,58,15,2,1,32,10,295,285,20
+LN ,Center Innov in Teach Learn ,Undergraduate ,94,49,40,5,29,15,7,8,0,1,5,0,29,8,1,2,21,15,79,90,4
+LP ,School of Information Sciences ,Graduate ,809,250,554,5,403,23,25,43,0,0,18,288,9,32,9,1,33,350,459,134,675
+LT ,Carle Illinois Medicine ,Professional ,32,15,15,2,8,16,2,3,0,0,0,0,3,2,1,0,16,4,28,0,32
+NB ,Provost & VC Acad Affairs ,Undergraduate ,3,0,2,1,1,0,0,1,0,0,0,0,1,1,0,0,0,3,0,3,0
