@@ -36,8 +36,8 @@
       </div>
       <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
     </div>
-    <p *ngIf="!undergrad">Note: Masters (e.g. MS, MCS, MEng) and PhD programs are combined in each major</p>
-    <p *ngIf="undergrad">Note: Engineering Undeclared is a program only for freshman. Chemical Engineering is in LAS</p>
+    <p *ngIf="level === 'masters'">Note: Masters (e.g. MS, MCS, MEng) are combined in each major</p>
+    <p *ngIf="level === 'undergrad'">Note: Engineering Undeclared is a program only for freshman. Chemical Engineering is in LAS</p>
 
 
 </div>
