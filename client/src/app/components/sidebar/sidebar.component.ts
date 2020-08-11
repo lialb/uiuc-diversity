@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
   openNav() {
     document.getElementById("mySidebar").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("main").style.visibility = "hidden";
     this.navbarClosed = false;
   }
   
@@ -25,6 +26,7 @@ export class SidebarComponent implements OnInit {
   closeNav() {
     document.getElementById("mySidebar").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+    document.getElementById("main").style.visibility = "visible";
     this.navbarClosed = true;
   }
 
