@@ -38,9 +38,9 @@ def getDegrees():
         next(r)
         for row in r:
             degree = row[3].strip()
-            if degree == '' or degree == 'NDEG':
+            if degree == '':
                 continue
-            if degree[0] == 'B' or degree == 'NONE':
+            if degree[0] == 'B' or degree == 'NONE' or degree == 'NDEG':
                 undergrad.add(degree)
             elif degree[-1] == 'D':
                 doctorate.add(degree)
