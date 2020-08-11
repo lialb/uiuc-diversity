@@ -4,10 +4,13 @@
 <div class="container">
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a [class]="'nav-link' + (undergrad ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
+      <a [class]="'nav-link' + (level === 'undergrad' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
     </li>
     <li class="nav-item">
-      <a [class]="'nav-link' + (undergrad ? '' : ' active')" [routerLink]="['/college', collegeAbbreviation, 'graduate']">Graduate</a>
+      <a [class]="'nav-link' + (level === 'masters' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'masters']">Masters</a>
+    </li>
+    <li class="nav-item">
+      <a [class]="'nav-link' + (level === 'doctorate' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'doctorate']">Doctorate</a>
     </li>
   </ul>
   <br>
