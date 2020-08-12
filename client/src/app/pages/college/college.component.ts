@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 import * as d3 from 'd3';
+import d3Tip from 'd3-tip';
 import { legendColor } from 'd3-svg-legend';
 import * as colleges from '../../../assets/colleges.json';
 import * as data from '../../../../../data/json/2019.json'
@@ -138,7 +139,21 @@ export class CollegeComponent implements OnInit {
                             .attr("y", d => y(d.data.major)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
                             .attr("x", d => x(d[0])) // the coordinate where this rect starts
                             .attr("width", d => x(d[1]) - x(d[0]))  // the length is decided by the starting points of adjacent two rects
-                            .attr("height", y.bandwidth()); // height is bandwidth, remember it is a function.
+                            .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
+                            .on("mouseover", (d,i,n) => {
+                              tip.show(d, n[i]);
+                              d3.selectAll('rect').filter(h => h !== d)
+                                .transition().duration(200)
+                                .style("fill-opacity", 0.3);
+                            })
+                              // this.highlightLayer(d,i)})
+                            .on("mouseout", (d,i,n) => {
+                              tip.hide();
+                              d3.selectAll('rect')
+                                .transition().duration(200)
+                                .style("fill-opacity", 1);
+
+                            });
                     
     // the legend
     const legendsvg = d3.select('.legend'); // another svg on top of the main svg
@@ -153,32 +168,7 @@ export class CollegeComponent implements OnInit {
                .attr('fill', 'black')
                .attr('font-size', 12);
 
-    // const legend = svg.append('g')
-    //       .attr('class', 'legend')
-    //       .attr('transform', 'translate(0,0)');
-
-    // const lg = legend.selectAll('g')
-    //   .data(majorArray)
-    //   .enter()
-    //   .append('g')
-    //   .attr('transform', (d,i) => `translate(${i * 100}, 25)`);
-
-    // lg.append('rect')
-    //   .style('fill', d => {
-    //     console.log(d);
-    //     return color(d.major)})
-    //   .attr('x', 0)
-    //   .attr('y', 0)
-    //   .attr('width', 10)
-    //   .attr('height', 10);
-
-    // lg.append('text')
-    //   .style('font-size', '13px')
-    //   .attr('x', 17.5)
-    //   .attr('y', 10)
-    //   .text(d => d.major);
-
-    // calling yAxis in the group 
+    // calling xAxis, yAxis in the group 
     graph.append('g')
         //  .attr('transform', 'translate(-10,2)')
          .call(yAxis).selectAll('text')
@@ -193,8 +183,44 @@ export class CollegeComponent implements OnInit {
           .attr('transform', 'translate(-5,0)')
           .style("text-anchor", "end")
           .attr("transform", "rotate(-40)");
+
+    //  tooltip
+
+    const hightlightLayer = (d, i) => {
+
+    }
+    const tip = d3Tip()
+                .attr("class", "d3-tip")
+                .html(d => {
+                  const d2 = d[1] - d[0];
+                  const obj = d.data  // original Object
+                  const key = Object.keys(obj).find(key => obj[key] === d2)  // finding the race, which is the key, by value. 
+                  return` 
+                    <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; margin: 0" >
+                      <h5>${key}</h5>
+                      <h6><strong>${d2}</strong> out of <strong>${d.data.total}</strong> students</h6>
+                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in this major</span></h6>
+                    </div>
+                  `})
+                // })
+                // .html(function (d) {
+                //   var d2 = d[1]-d[0];
+                //   return "<div style='text-align: center;margin-left:auto; margin-right:auto;'><big><big>" + d.race + "</big><br><small>" + d.year + "</small><br><br>" +
+                //   "<div class='row' style='text-align: center; margin-left:auto; margin-right:auto;'>" +
+                //   "<div class='col-6' style='border-right: 1px solid white;'>" +
+                //     '<span style="font-size: 22px;">' + makePercent(d2/d.total) + '</span><br>' +
+                //     '<span style="font-size: 11px; text-align: center;">of students</span><br>' +
+                //   "</div>" +
+                //   "<div class='col-6'>" +
+                //     '<span style="font-size: 22px;">' + numberWithCommas(d2) + '</span><br>' +
+                //     '<span style="font-size: 11px;">students</span><br>' +
+                //   "</div></div><br><small>Out of <big><b>" + numberWithCommas(d.total) + "</b></big> students</div>"
+                // });
+
+    svg.call(tip);
   
   }
+
 
 
   // createPieChart(majorCode: number, isUndergrad: boolean) {
