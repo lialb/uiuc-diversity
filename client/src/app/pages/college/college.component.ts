@@ -209,15 +209,15 @@ export class CollegeComponent implements OnInit {
                 .attr("class", "d3-tip")
                 .html(d => {
                   const d2 = d[1] - d[0];
-                  const obj = d.data  // original Object
-                  const key = Object.keys(obj).find(key => obj[key] === d2)  // finding the race, which is the key, by value. 
+                  const obj = d.data;  // original Object
+                  const key = Object.keys(obj).find(key => obj[key] === d2);  // finding the race, which is the key, by value. 
                   return` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; margin: 0" >
                       <h5>${key}</h5>
                       <h6><strong>${d2}</strong> out of <strong>${d.data.total}</strong> students</h6>
-                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in this major</span></h6>
+                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in ${obj.major} ${obj.degree}</span></h6>
                     </div>
-                  `})
+                  `});
                 // })
                 // .html(function (d) {
                 //   var d2 = d[1]-d[0];
