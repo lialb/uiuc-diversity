@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
     let level: string = 'undergrad';
     if (abbreviation === 'DGS') {
       level = 'nondegree';
-    } else if (abbreviation === 'GRAD') {
+    } else if (['GRAD', 'MED'].indexOf(abbreviation) > -1) {
       level = 'doctorate';
     } else if (['IS', 'VM', 'LAW'].indexOf(abbreviation) > -1) {
       level = 'masters';

@@ -69,6 +69,11 @@
             "abbreviation" : "VM",
             "code" : "LC",
             "name" : "College of Veterinary Medicine"
+        },
+        {
+            "abbreviation" : "MED",
+            "code" : "LT",
+            "name" : "Carle Illinois College of Medicine"
         }
     ]
 }

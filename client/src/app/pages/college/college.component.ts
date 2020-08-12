@@ -65,6 +65,10 @@ export class CollegeComponent implements OnInit {
     } else if (this.collegeAbbreviation === 'GRAD') {
       this.showUndergrad = false;
       this.showMasters = false;
+    } else if (this.collegeAbbreviation === 'MED') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+      this.showNondegree = false;
     } else if (['IS', 'VM', 'LAW'].indexOf(this.collegeAbbreviation) > -1) {
       this.showUndergrad = false;
     }
