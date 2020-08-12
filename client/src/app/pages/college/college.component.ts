@@ -142,7 +142,7 @@ export class CollegeComponent implements OnInit {
                             .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
                             .on("mouseover", (d,i,n) => {
                               tip.show(d, n[i]);
-                              d3.selectAll('rect').filter(h => h !== d)
+                              svg.selectAll('rect').filter(h => h !== d)
                                 .transition().duration(200)
                                 .style("fill-opacity", 0.3);
                             })
