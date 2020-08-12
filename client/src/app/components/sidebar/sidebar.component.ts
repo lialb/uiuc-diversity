@@ -33,6 +33,7 @@ export class SidebarComponent implements OnInit {
     this.navbarClosed = true;
   }
 
+  // close side menu when user clicks outside
   @HostListener('document:click', ['$event'])
   clickout(event: { target: any; }): void {
     if (!this.er.nativeElement.contains(event.target)) {
