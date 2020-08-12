@@ -215,7 +215,7 @@ export class CollegeComponent implements OnInit {
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; margin: 0" >
                       <h5>${key}</h5>
                       <h6><strong>${d2}</strong> out of <strong>${d.data.total}</strong> students</h6>
-                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in ${obj.major} ${obj.degree}</span></h6>
+                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in ${obj.major} ${this.level !== 'nondegree' ? obj.degree : ''}</span></h6>
                     </div>
                   `});
                 // })
