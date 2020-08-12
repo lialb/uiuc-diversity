@@ -198,6 +198,7 @@ export class CollegeComponent implements OnInit {
                       <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in this major</span></h6>
                     </div>
                   `})
+
     svg.call(tip);
   
   }
