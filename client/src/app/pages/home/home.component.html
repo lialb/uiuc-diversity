@@ -1,16 +1,114 @@
-<h1 style="text-align: center;">Welcome!</h1>
-<div>
-    <p>Use the menu in the top left corner to see data on different colleges within UIUC.</p>
-    <h3>Introduction</h3>
-    <p>
-        The University of Illinois at Urbana-Champaign has one of the most diverse college student bodies in the world. However,
-        while some majors have a motley of demographics, other programs are more concentrated. This tool aims to provide information
-        on the raw data, context for historical norms and racial norms, and progression of diversity within fields.
-        Below, we have overall statistics of every college.
+<div class="container" style="margin-top: 1rem;">
+    <!-- <div class="row text-center">
+        <div class="col-12">
+            <h2>Welcome!</h2>
+        </div>
+    </div> -->
 
-    </p>
-    <h3>Overall</h3>
-    <p>
-        Below, we have overall statistics of every college.
-    </p>
+
+    <!-- photos -->
+    <section class="row">
+        <div class="col-lg-1 col-md-2 col-sm-2">
+            <a href="https://lialbert.com">
+              <img src="../../../assets/pictures/albert.jpg" class="circle img-fluid imgsmall" alt="">
+            </a>
+        </div>
+        <div class="col-lg-4 col-md-10 col-sm-10 small" style="margin-left: -1rem;">
+            <p style="margin-bottom: 0; font-size: small;" > Albert Li '22</p>
+            <p class="text-muted small2" style="font-size: smaller; margin-top: 0;">Computer Science Major, Math and Stat minor<br>Grainger College of Engineering</p>
+        </div>
+        <div class="col-lg-1 col-md-2 col-sm-2 distance" >
+            <a href="https://www.linkedin.com/in/tianyi-zhou-967991193/">
+              <img src="../../../assets/pictures/bryant.jpeg" class="circle img-fluid imgsmall" alt="">
+            </a>
+        </div>
+        <div class="col-lg-4 col-md-10 col-sm-10 small" style="margin-left: -1rem;">
+            <p style="margin-bottom: 0;font-size: small;" class="small"> Tianyi Zhou '22</p>
+            <p class="text-muted small2" style="font-size: smaller; margin-top: 0;">Econometrics & Quantitative Economics Major<br>College of Liberal Arts and Science</p>
+        </div>
+    </section>
+    <!-- <section class="row">
+        <div class="col-lg-1 col-md-2 col-sm-2 distance" >
+            <img src="../../../assets/pictures/bryant.jpeg" class="circle img-fluid imgsmall" alt="">
+        </div>
+        <div class="col-lg-4 col-md-10 col-sm-10 small" style="margin-left: -1rem;">
+            <p style="margin-bottom: 0;font-size: small;" class="small"> Tianyi Zhou '22</p>
+            <p class="text-muted small2" style="font-size: smaller; margin-top: 0;">Econometrics Major<br>College of LAS</p>
+        </div>
+    </section> -->
+
+
+    <hr style="position: relative; bottom: 5px;">
+    
+
+    <!-- rows for introduction -->
+    <section class="row">
+        <div class="col-12">
+            <h3>Introduction</h3>
+        </div>
+    </section>
+    <div class="row">
+        <div class="col-12">
+            <p>
+                The University of Illinois at Urbana-Champaign has one of the most diverse college student bodies in the world. However,
+                while some majors have a motley of demographics, other programs are more concentrated. This tool aims to provide information
+                on the raw data, context for historical norms and racial norms, and progression of diversity within fields.
+                Below, we have overall statistics of every college.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- rows for overview -->
+    <div class="row">
+        <div class="col-12">
+            <h3>Overview</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>This <a href="https://github.com/albearli/UIUC-Major-Demographics" target="_blank" rel="noopner noreferrer">open-source project</a>
+                 was made by two UIUC students who were heavily inspired by visualizations created by faculty and students. All data is 
+                public and comes from the <a href="http://dmi.illinois.edu/" target="_blank" rel="noopner noreferrer">Division of Management Information</a>. 
+                Huge thanks to Professor Wade and Devin Oliver for their inspiration and help.</p>
+        </div>
+    </div>
+
+
+    <!-- rows for interaction -->
+    <section class="row">
+        <div class="col-12">
+            <h3>Interact with the visualization</h3>
+        </div>
+    </section>
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Hover over any part of the bar chart, it will show the specific data attached. Click on that and a pie chart of this major/college will be generated. 
+                Use the menu <span style="font-size: large; color: #123870;">in the top left corner</span> to see data on different colleges within UIUC.
+                Below, we have overall statistics of every college.
+            </p>
+        </div>
+    </div>
+
+    <!-- legend group is drawn here -->
+    <section class="row justify-content-center">
+        <div class="col-12">
+          <svg class="legend" style="width: 100%; height: 50px">
+    
+          </svg>
+        </div>
+      </section>
+    
+    
+      <!-- the section where the main bar chart is drawn -->
+      <section class="row justify-content-center">
+        <div class="col-12">
+          <svg class="canvas" style="width: 102%; height: 1000px" [ngStyle]="{'height': svgHeight}">
+    
+          </svg>
+        </div>
+      </section>
+
+
 </div>

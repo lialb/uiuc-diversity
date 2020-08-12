@@ -42,6 +42,7 @@ export class CollegeComponent implements OnInit {
   svgWidth = 400;
   svgHeight: number;
   barRange = 900;
+  piechartData;
 
   showUndergrad = true;
   showMasters = true;
@@ -162,17 +163,22 @@ export class CollegeComponent implements OnInit {
                             .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
                             .on("mouseover", (d,i,n) => {
                               tip.show(d, n[i]);
-                              svg.selectAll('rect').filter(h => h !== d)
-                                .transition().duration(200)
-                                .style("fill-opacity", 0.3);
+                              svg.selectAll('rect').filter(h => h !== d)  // select all other rectangles not is not the one hovered over
+                                .style("cursor", "pointer")
+                                .transition().duration(100)
+                                .style("fill-opacity", 0.3);  // change their opacity to highlight the emphasized one.
                             })
                               // this.highlightLayer(d,i)})
                             .on("mouseout", (d,i,n) => {
                               tip.hide();
                               d3.selectAll('rect')
                                 .transition().duration(200)
-                                .style("fill-opacity", 1);
-
+                                .style("fill-opacity", 1); // change all the colors of rectangle back
+                            })
+                            .on('click', d => {
+                              this.piechartData = d.data;
+                              this.createPiechart(this.piechartData);
+                              console.log(d.data);
                             });
                     
     // the legend
@@ -208,9 +214,22 @@ export class CollegeComponent implements OnInit {
     const tip = d3Tip()
                 .attr("class", "d3-tip")
                 .html(d => {
+                  // console.log(d);
                   const d2 = d[1] - d[0]; // the count of specific race in this major
                   const obj = d.data;  // original Object
-                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
+                  const half = d.data.total / 2;
+                  const third = d.data.total * 2 / 3;
+                  let key;
+                  if (d.data.majorCode == 93 && d[0] == 18) {
+                    key = Object.keys(obj).find(key => {
+                      return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
+                    }); 
+                  } else {
+                    key = Object.keys(obj).find(key => {
+                      return obj[key] === d2 && key !== 'total' 
+                    });  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
+                  }
+              
                   return` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
                       <h5 style="font-size: 1.5rem">${key}</h5>
@@ -225,14 +244,56 @@ export class CollegeComponent implements OnInit {
 
 
 
-  // createPieChart(majorCode: number, isUndergrad: boolean) {
-  //   this.showPieChart = true;
-  //   if (isUndergrad) {
-  //     this.majorData = data['default'][this.collegeCode].undergraduate.filter((x: { majorCode: number; }) => x.majorCode === majorCode);
-  //   } else {
-  //     this.majorData = data['default'][this.collegeCode].graduate.filter((x: { majorCode: number; }) => x.majorCode === majorCode);
-  //   }
-  //   console.log(this.majorData);
-  // }
+  createPiechart({ major, majorCode, college, degree, year }) {
+    const svg = d3.select('.canvas');
+    svg.select('.piechart').remove();
+    //the main group where everything is drawn
+    const pieGraph = svg.append("g")
+                     .attr('class', 'piechart')
+                     .attr("transform", `translate(${this.graphMargin.left + 200}, ${this.svgHeight + 200})`);
+
+    let educationLevel: string;
+    switch(this.level) {
+      case 'undergrad':
+        educationLevel = 'undergraduate';
+        break;
+      case 'masters':
+        educationLevel = 'masters';
+        break;
+      case 'doctorate':
+        educationLevel = "doctorate";
+        break;
+      default:
+        educationLevel = 'nondegree';
+        break;
+    }
+
+    const selectedData = data['default'][college][educationLevel].filter(entry => entry.majorCode === majorCode);
+    console.log(selectedData);
+
+    const pie = d3.pie().sort(null).value(d => d.count);
+    const arcPath = d3.arc().innerRadius(75).outerRadius(150);
+    const color = d3.scaleOrdinal(d3['schemeSet3']).domain(selectedData.map(entry => entry.race));
+
+    const paths = pieGraph.selectAll('path').data(pie(selectedData));
+
+    const arcTweenEnter = (d) => {
+      let i = d3.interpolate(d.endAngle, d.startAngle);
+
+      return function(t) {
+        d.startAngle = i(t);
+        return arcPath(d);
+      };
+    };
+    paths.enter()
+          .append('path')
+          .attr('d', arcPath)
+          .attr('fill', d => color(d.data.race))
+          .attr('stroke', 'white')
+          .attr('stroke-width', 3)
+          .transition().duration(750)
+          .attrTween("d", arcTweenEnter);
+  }
+  
 
 }

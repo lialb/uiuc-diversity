@@ -1,16 +1,17 @@
 $UIUCOrange: #E84A26;
-$UIUCBlue: #13294A;
+$UIUCBlue: #123870;
+//#13294A;
 /* The sidebar menu */
 .sidebar {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
-  top: 0;
   left: 0;
   background-color: $UIUCBlue;
+  color: orange;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
+  padding-top: 40px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
@@ -38,7 +39,7 @@ $UIUCBlue: #13294A;
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s; /* If you want a transition effect */
-  padding: 20px;
+  padding: 1rem;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -52,20 +53,22 @@ $skyblue: #328CC1;
 .college-button {
   background-color: transparent; /* Green */
   border: none;
-  color: $UIUCOrange;
-  border-color: $UIUCOrange;
+  color: rgba(255,255,255,0.9);
+  border-color: none;
   text-align: center;
   text-decoration: none;
   padding: 10px 16px 10px 16px;
   display: inline-block;
   font-size: 16px;
-  width: 75%;
+  width: 80%;
   margin-left: 2%;
   cursor: pointer;
   box-sizing: border-box;
-  border-bottom: solid 3px;
+  border-bottom: solid 1px;
 }
 
 .college-button:hover {
-  color: white;
+  color: $UIUCOrange;
 }
+
+
