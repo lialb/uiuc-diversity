@@ -59,6 +59,8 @@ export class CollegeComponent implements OnInit {
       this.collegeAbbreviation = params.get('college');
       this.level = params.get('level');
     });
+
+    // get rid of certain tabs for colleges that don't have certain levels
     if (this.collegeAbbreviation === 'DGS') {
       this.showUndergrad = false;
       this.showMasters = false;
@@ -83,6 +85,8 @@ export class CollegeComponent implements OnInit {
 
   initGraph(): void {
     let majorArray;
+
+    // select data based on tab
     if (this.level === 'undergrad') {
       majorArray = data['default'][this.collegeCode].undergradTotal;
     } else if (this.level === 'masters') {
@@ -225,16 +229,14 @@ export class CollegeComponent implements OnInit {
                       return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
                     }); 
                   } else {
-                    key = Object.keys(obj).find(key => {
-                      return obj[key] === d2 && key !== 'total' 
-                    });  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
+                    key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
                   }
               
                   return` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
-                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${obj.degree}</span></h6>
+                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${this.level !== 'nondegree' ? obj.degree : ''}</span></h6>
                     </div>
                   `});
 
@@ -290,10 +292,9 @@ export class CollegeComponent implements OnInit {
           .attr('d', arcPath)
           .attr('fill', d => color(d.data.race))
           .attr('stroke', 'white')
-          .attr('stroke-width', 3)
+          .attr('stroke-width', 2)
           .transition().duration(750)
           .attrTween("d", arcTweenEnter);
   }
   
-
 }
