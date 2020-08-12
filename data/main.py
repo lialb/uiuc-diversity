@@ -145,7 +145,7 @@ def getCollegeData(year, document):
                 
 
 def writeToJSON(data, document):
-    with open('./json/' + document + '.json', 'w') as json_file:
+    with open('../client/src/assets/json/' + document + '.json', 'w') as json_file:
         json.dump(data, json_file)
     print('Done writing to json file:', document)
 
