@@ -185,38 +185,19 @@ export class CollegeComponent implements OnInit {
           .attr("transform", "rotate(-40)");
 
     //  tooltip
-
-    const hightlightLayer = (d, i) => {
-
-    }
     const tip = d3Tip()
                 .attr("class", "d3-tip")
                 .html(d => {
                   const d2 = d[1] - d[0];
                   const obj = d.data  // original Object
-                  const key = Object.keys(obj).find(key => obj[key] === d2)  // finding the race, which is the key, by value. 
+                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total')  // finding the race, which is the key, by value. 
                   return` 
-                    <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; margin: 0" >
-                      <h5>${key}</h5>
-                      <h6><strong>${d2}</strong> out of <strong>${d.data.total}</strong> students</h6>
-                      <h6><strong>${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span> in this major</span></h6>
+                    <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
+                      <h5 style="font-size: 1.5rem">${key}</h5>
+                      <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
+                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in this major</span></h6>
                     </div>
                   `})
-                // })
-                // .html(function (d) {
-                //   var d2 = d[1]-d[0];
-                //   return "<div style='text-align: center;margin-left:auto; margin-right:auto;'><big><big>" + d.race + "</big><br><small>" + d.year + "</small><br><br>" +
-                //   "<div class='row' style='text-align: center; margin-left:auto; margin-right:auto;'>" +
-                //   "<div class='col-6' style='border-right: 1px solid white;'>" +
-                //     '<span style="font-size: 22px;">' + makePercent(d2/d.total) + '</span><br>' +
-                //     '<span style="font-size: 11px; text-align: center;">of students</span><br>' +
-                //   "</div>" +
-                //   "<div class='col-6'>" +
-                //     '<span style="font-size: 22px;">' + numberWithCommas(d2) + '</span><br>' +
-                //     '<span style="font-size: 11px;">students</span><br>' +
-                //   "</div></div><br><small>Out of <big><b>" + numberWithCommas(d.total) + "</b></big> students</div>"
-                // });
-
     svg.call(tip);
   
   }
