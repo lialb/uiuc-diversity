@@ -40831,96 +40831,6 @@
             },
             {
                 "race": "Caucasian",
-                "count": 300,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Asian American",
-                "count": 13,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "African American",
-                "count": 3,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Hispanic",
-                "count": 12,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Native American",
-                "count": 1,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Hawaiian/ Pacific Isl",
-                "count": 3,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Multiracial",
-                "count": 131,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "International",
-                "count": 374,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Unknown",
-                "count": 89,
-                "total": 463,
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009
-            },
-            {
-                "race": "Caucasian",
                 "count": 14,
                 "total": 24,
                 "major": "VMS-Veterinary Clinical Medcne",
@@ -41189,6 +41099,96 @@
                 "degree": "PHD",
                 "college": "LC",
                 "majorCode": 361,
+                "year": 2009
+            },
+            {
+                "race": "Caucasian",
+                "count": 300,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Asian American",
+                "count": 13,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "African American",
+                "count": 3,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Hispanic",
+                "count": 12,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Native American",
+                "count": 1,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Hawaiian/ Pacific Isl",
+                "count": 3,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Multiracial",
+                "count": 131,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "International",
+                "count": 374,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009
+            },
+            {
+                "race": "Unknown",
+                "count": 89,
+                "total": 463,
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
                 "year": 2009
             },
             {
@@ -41574,23 +41574,6 @@
                 "Unknown": 1
             },
             {
-                "major": "Veterinary Medicine",
-                "degree": "DVM",
-                "college": "LC",
-                "majorCode": 480,
-                "year": 2009,
-                "total": 463,
-                "Caucasian": 300,
-                "Asian American": 13,
-                "African American": 3,
-                "Hispanic": 12,
-                "Native American": 1,
-                "Hawaiian/ Pacific Isl": 3,
-                "Multiracial": 131,
-                "International": 374,
-                "Unknown": 89
-            },
-            {
                 "major": "VMS-Veterinary Clinical Medcne",
                 "degree": "MS",
                 "college": "LC",
@@ -41642,6 +41625,23 @@
                 "Multiracial": 0,
                 "International": 3,
                 "Unknown": 8
+            },
+            {
+                "major": "Veterinary Medicine",
+                "degree": "DVM",
+                "college": "LC",
+                "majorCode": 480,
+                "year": 2009,
+                "total": 463,
+                "Caucasian": 300,
+                "Asian American": 13,
+                "African American": 3,
+                "Hispanic": 12,
+                "Native American": 1,
+                "Hawaiian/ Pacific Isl": 3,
+                "Multiracial": 131,
+                "International": 374,
+                "Unknown": 89
             },
             {
                 "major": "VMS-Veterinary Clinical Medcne",

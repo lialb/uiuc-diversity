@@ -45,7 +45,7 @@ def getDegrees():
                 undergrad.add(degree)
             elif degree == 'NONE' or degree == 'NDEG':
                 nondegree.add(degree)
-            elif degree[-1] == 'D':
+            elif degree[-1] == 'D' or degree == 'DVM':
                 doctorate.add(degree)
             else:
                 masters.add(degree)
