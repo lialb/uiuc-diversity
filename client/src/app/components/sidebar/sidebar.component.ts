@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as data from '../../../assets/colleges.json';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +10,8 @@ import * as data from '../../../assets/colleges.json';
 export class SidebarComponent implements OnInit {
 
   colleges = data.colleges;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
   }
@@ -28,6 +31,18 @@ export class SidebarComponent implements OnInit {
     document.getElementById("main").style.marginLeft = "0";
     document.getElementById("main").style.visibility = "visible";
     this.navbarClosed = true;
+  }
+
+  selectCollege(abbreviation: string) {
+    let level: string = 'undergrad';
+    if (abbreviation === 'DGS') {
+      level = 'nondegree';
+    } else if (abbreviation === 'GRAD') {
+      level = 'doctorate';
+    } else if (['IS', 'VM', 'LAW'].indexOf(abbreviation) > -1) {
+      level = 'masters';
+    }
+    this.router.navigate(['/college', abbreviation, level]);
   }
 
 

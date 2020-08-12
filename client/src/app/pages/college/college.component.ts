@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 // import * as _ from 'lodash';
 import * as d3 from 'd3';
-import d3Tip from 'd3-tip';
+import d3Tip from 'd3-tip'; //d3.tip tip is not a function automatically imported with d3, d3-tip library is needed instead
 import { legendColor } from 'd3-svg-legend';
 import * as colleges from '../../../assets/colleges.json';
 import * as data from '../../../../../data/json/2019.json'
@@ -188,9 +188,9 @@ export class CollegeComponent implements OnInit {
     const tip = d3Tip()
                 .attr("class", "d3-tip")
                 .html(d => {
-                  const d2 = d[1] - d[0];
+                  const d2 = d[1] - d[0]; // the count of specific race in this major
                   const obj = d.data  // original Object
-                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total')  // finding the race, which is the key, by value. 
+                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total')  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
                   return` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
                       <h5 style="font-size: 1.5rem">${key}</h5>

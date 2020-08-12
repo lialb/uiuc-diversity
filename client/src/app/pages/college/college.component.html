@@ -13,16 +13,16 @@
   <section class="row justify-content-center">
     <div class="col-lg-8 col-md-12 col-sm-12">
       <ul class="nav nav-tabs">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="showUndergrad">
           <a [class]="'nav-link' + (level === 'undergrad' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="showMasters">
           <a [class]="'nav-link' + (level === 'masters' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'masters']">Masters</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="showDoctorate">
           <a [class]="'nav-link' + (level === 'doctorate' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'doctorate']">Doctorate</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="showNondegree">
           <a [class]="'nav-link' + (level === 'nondegree' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'nondegree']">Non-Degree</a>
         </li>
       </ul>
