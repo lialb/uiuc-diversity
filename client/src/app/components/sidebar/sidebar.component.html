@@ -2,8 +2,8 @@
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 
   <div class="button-groups" *ngFor="let college of colleges">
-    <!-- <button [routerLink]="['/college']" class="btn-outline-secondary">{{ college.abbreviation }} - {{ college.name }}</button> -->
-    <button [routerLink]="['/college', college.abbreviation, 'undergrad']" class="btn-block college-button">{{ college.abbreviation }}</button>
+    <!-- <button [routerLink]="['/college', college.abbreviation, 'undergrad']" class="btn-block college-button">{{ college.abbreviation }}</button> -->
+    <button (click)="selectCollege(college.abbreviation)" class="btn-block college-button">{{ college.abbreviation }}</button>
   </div>
   <div class="button-groups">
     <button [routerLink]="['/college', 'other']" class="btn-block college-button">Other</button>

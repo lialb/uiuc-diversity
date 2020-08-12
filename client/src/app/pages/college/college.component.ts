@@ -40,8 +40,13 @@ export class CollegeComponent implements OnInit {
     bottom: 20
   };
   svgWidth = 400;
-  svgHeight;
+  svgHeight: number;
   barRange = 900;
+
+  showUndergrad = true;
+  showMasters = true;
+  showDoctorate = true;
+  showNondegree = true;
 
   constructor(private ar: ActivatedRoute, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false; // reload on param change
@@ -53,6 +58,17 @@ export class CollegeComponent implements OnInit {
       this.collegeAbbreviation = params.get('college');
       this.level = params.get('level');
     });
+    if (this.collegeAbbreviation === 'DGS') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+      this.showDoctorate = false;
+    } else if (this.collegeAbbreviation === 'GRAD') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+    } else if (['IS', 'VM', 'LAW'].indexOf(this.collegeAbbreviation) > -1) {
+      this.showUndergrad = false;
+    }
+
     this.selectedCollege = this.collegeData.find(college => college['abbreviation'] === this.collegeAbbreviation);
     this.collegeDescription = this.selectedCollege.name; // Example: College of Education
     this.collegeCode = this.selectedCollege.code; // Example: 'KP' for Grainger
@@ -60,7 +76,7 @@ export class CollegeComponent implements OnInit {
     this.initGraph();
   }
 
-  initGraph() {
+  initGraph(): void {
     let majorArray;
     if (this.level === 'undergrad') {
       majorArray = data['default'][this.collegeCode].undergradTotal;
