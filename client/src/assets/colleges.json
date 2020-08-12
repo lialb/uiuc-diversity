@@ -56,11 +56,6 @@
             "name" : "College of Media"
         },
         {
-            "abbreviation" : "MED",
-            "code" : "LB",
-            "name" : "Carle College of Medicine"
-        },
-        {
             "abbreviation" : "IS",
             "code" : "LP",
             "name" : "School of Information Sciences"

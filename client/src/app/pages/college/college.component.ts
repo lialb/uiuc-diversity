@@ -40,8 +40,13 @@ export class CollegeComponent implements OnInit {
     bottom: 20
   };
   svgWidth = 400;
-  svgHeight;
+  svgHeight: number;
   barRange = 900;
+
+  showUndergrad = true;
+  showMasters = true;
+  showDoctorate = true;
+  showNondegree = true;
 
   constructor(private ar: ActivatedRoute, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false; // reload on param change
@@ -53,6 +58,17 @@ export class CollegeComponent implements OnInit {
       this.collegeAbbreviation = params.get('college');
       this.level = params.get('level');
     });
+    if (this.collegeAbbreviation === 'DGS') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+      this.showDoctorate = false;
+    } else if (this.collegeAbbreviation === 'GRAD') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+    } else if (['IS', 'VM', 'LAW'].indexOf(this.collegeAbbreviation) > -1) {
+      this.showUndergrad = false;
+    }
+
     this.selectedCollege = this.collegeData.find(college => college['abbreviation'] === this.collegeAbbreviation);
     this.collegeDescription = this.selectedCollege.name; // Example: College of Education
     this.collegeCode = this.selectedCollege.code; // Example: 'KP' for Grainger
@@ -60,7 +76,7 @@ export class CollegeComponent implements OnInit {
     this.initGraph();
   }
 
-  initGraph() {
+  initGraph(): void {
     let majorArray;
     if (this.level === 'undergrad') {
       majorArray = data['default'][this.collegeCode].undergradTotal;
@@ -189,15 +205,15 @@ export class CollegeComponent implements OnInit {
                 .attr("class", "d3-tip")
                 .html(d => {
                   const d2 = d[1] - d[0]; // the count of specific race in this major
-                  const obj = d.data  // original Object
-                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total')  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
+                  const obj = d.data;  // original Object
+                  const key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
                   return` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
-                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in this major</span></h6>
+                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${obj.degree}</span></h6>
                     </div>
-                  `})
+                  `});
 
     svg.call(tip);
   
