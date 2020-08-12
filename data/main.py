@@ -11,21 +11,22 @@ races = ['Caucasian', 'Asian American', 'African American', 'Hispanic',
          'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown']
 
 def getSummaryData(year, document):
-    data = {'data': [], 'total': []}
+    data = {'undergradTotal': [], 'gradTotal': []}
 
     with open('./cleanData/' + document + '.csv') as f:
         r = csv.reader(f)
         next(r)
         for row in r:
-            total = {'total': int(row[3]), 'college': row[0].strip(), 'name': row[1].strip(), 'level': row[2].strip()} # For total in one major
+            level = row[2].strip()
+            total = {'college': row[0].strip(), 'name': row[1].strip(), 'level': level, 'total': int(row[3].strip()), 'year': year }
 
             for i in range(len(races)): # add dictionary of count and major information for each race
-                temp = {'college': total['college'], 'name': total['name'], 'level': total['level'],
-                        'race': races[i], 'count': int(row[7 + i]), 'total': total['total'], 'year': year}
-                data['data'].append(temp)
-                total[races[i]] = int(row[7 + i])
-
-            data['total'].append(total)
+                total[races[i]] = int(row[7 + i].strip())
+            if level == 'Undergraduate':
+                data['undergradTotal'].append(total)
+            else:
+                data['gradTotal'].append(total)
+    
 
     writeToJSON(data, document)
 
@@ -151,5 +152,7 @@ def writeToJSON(data, document):
 year = 2019
 while year >= 2004:
     getSummaryData(year, str(year) + 'Summary')
-    getCollegeData(year, str(year))
+    # getCollegeData(year, str(year))
     year -= 1
+# year = 2019
+# getSummaryData(year, str(year) + 'Summary')
