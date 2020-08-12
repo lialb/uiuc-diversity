@@ -88,7 +88,7 @@ def getCollegeData(year, document):
                     data[collegeCode]['undergradTotal'][-1][races[i]] += count # For total in one major
                 data[collegeCode]['undergradTotal'][-1]['total'] += total # update totals
                 continue
-            elif len(data[collegeCode]['masters']) > 0 and majorCode == data[collegeCode]['masters'][-1]['majorCode'] and degree in mastersDegrees:
+            elif len(data[collegeCode]['masters']) > 0 and majorCode == data[collegeCode]['masters'][-1]['majorCode'] and degree == data[collegeCode]['masters'][-1]['degree'] and degree in mastersDegrees:
                 total = int(row[8])
                 for i in range(len(races)):
                     count = int(row[12 + i])
@@ -97,7 +97,7 @@ def getCollegeData(year, document):
                     data[collegeCode]['mastersTotal'][-1][races[i]] += count
                 data[collegeCode]['mastersTotal'][-1]['total'] += total
                 continue
-            elif len(data[collegeCode]['doctorate']) > 0 and majorCode == data[collegeCode]['doctorate'][-1]['majorCode'] and degree in doctorateDegrees:
+            elif len(data[collegeCode]['doctorate']) > 0 and majorCode == data[collegeCode]['doctorate'][-1]['majorCode'] and degree == data[collegeCode]['doctorate'][-1]['degree'] and degree in doctorateDegrees:
                 total = int(row[8])
                 for i in range(len(races)):
                     count = int(row[12 + i])
