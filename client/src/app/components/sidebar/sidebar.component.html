@@ -1,9 +1,9 @@
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 
-  <div class="button-groups">
+  <!-- <div class="button-groups">
     <button [routerLink]="['/']" class="btn-block college-button">Homepage</button>
-  </div>
+  </div> -->
   <div class="button-groups" *ngFor="let college of colleges">
     <!-- <button [routerLink]="['/college', college.abbreviation, 'undergrad']" class="btn-block college-button">{{ college.abbreviation }}</button> -->
     <button (click)="selectCollege(college.abbreviation)" class="btn-block college-button">{{ college.abbreviation }}</button>

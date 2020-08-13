@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import d3Tip from 'd3-tip'; //d3.tip tip is not a function automatically imported with d3, d3-tip library is needed instead
 import { legendColor } from 'd3-svg-legend';
-import * as colleges from '../../../assets/colleges.json';
+// import * as colleges from '../../../assets/colleges.json';
 import * as data from '../../../assets/json/2019Summary.json';
+import { Color, Label } from 'ng2-charts';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import * as combinedData from '../../../assets/json/combinedSummary.json';
+import { range } from 'rxjs';
 
 
 interface margins {
@@ -31,14 +35,74 @@ export class HomeComponent implements OnInit {
   barRange = 900;
   piechartData;
 
+  showUndergrad = true;
+
+  lineChartData: ChartDataSets[] = [
+    { data: [], label: 'Caucasian' },
+    { data: [], label: 'Asian American' },
+    { data: [], label: 'African American' },
+    { data: [], label: 'Hispanic' },
+    { data: [], label: 'Native American' },
+    { data: [], label: 'Hawaiian/ Pacific Isl' },
+    { data: [], label: 'Multiracial' },
+    { data: [], label: 'International' },
+    { data: [], label: 'Unknown' },
+  ];
+
+  lineChartLabels = [];
+
+  lineChartOptions = {
+    responsive: true,
+  };
+
+  lineChartColors: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgba(255,255,0,0.28)',
+    },
+  ];
+
+  lineChartLegend = true;
+  lineChartPlugins = [];
+  lineChartType = 'line';
+
+  lineChoice = 'KV'; // Default is LAS
+  
+  lineColors = [];
+
   constructor() { }
 
   ngOnInit() {
+    for (let i = 2004; i <= 2019; ++i) {
+      this.lineChartLabels.push(i);
+    }
+    this.initGraph();
+    this.initLineChart();
+  }
+
+  initLineChart(): void {
+    let labels = ['Caucasian', 'Asian American', 'African American', 'Hispanic', 'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown'];
+    console.log(combinedData['default'][this.lineChoice]['undergradTotal'][0]['data']);
+    for (let i = 0; i < labels.length; ++i) {
+      this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['undergradTotal'][i]['data'];
+    }
+
+  }
+
+  chooseLineGraph(choice: string): void {
+    console.log(choice);
+    this.lineChoice = choice;
+    this.initLineChart();
+  }
+
+  toggleGraph(choice: boolean): void {
+    this.showUndergrad = choice;
     this.initGraph();
   }
 
   initGraph(): void {
-    const collegeArray = data['default']['undergradTotal'];
+    const collegeArray = this.showUndergrad ? data['default']['undergradTotal'] : data['default']['gradTotal'];
+    d3.selectAll('g').remove();
 
     collegeArray.sort((a, b) => b.total - a.total)
     const svg = d3.select('.canvas');
@@ -65,7 +129,7 @@ export class HomeComponent implements OnInit {
     }
     const y = d3.scaleBand()	// scaleBand for categorical data		
       .range([0, this.svgHeight - this.graphMargin.top - this.graphMargin.bottom])	// height of y-axis
-      .domain(collegeArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
+      .domain(collegeArray.map(entry => entry.name))  // domain should be an array of all the majors in this collge
       .paddingInner(0.2) // padding between each bar
       .paddingOuter(0.2) // padding to x-axis
       .align(0.1);
@@ -81,10 +145,11 @@ export class HomeComponent implements OnInit {
     const xAxis = d3.axisBottom(x)  //put the text and ticks on the bottom of the y-axis
       .tickSize(4)
       .ticks(1)
-      .tickValues([0, d3.max(collegeArray, d => d.total)])
+      .tickValues([0, d3.max(collegeArray, d => d.total)]);
 
     // color is a function
-    const keys = Object.keys(collegeArray[0]).slice(6) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
+    const keys = Object.keys(collegeArray[0]).slice(5); //keys required to make stacked bar chart, which is each race, getting rid of keys like major
+    console.log(keys);
     const color = d3.scaleOrdinal(d3['schemeSet3']).domain(keys);  //scaleOrdinal 9 colors for 9 races
 
     // config data
@@ -104,7 +169,7 @@ export class HomeComponent implements OnInit {
     let rects = bargroups.selectAll('rect')
       .data(d => d)  // super tricky here, it still loops 9 times 
       .enter().append("rect")
-      .attr("y", d => y(d.data.major)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
+      .attr("y", d => y(d.data.name)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
       .attr("x", d => x(d[0])) // the coordinate where this rect starts
       .attr("width", d => x(d[1]) - x(d[0]))  // the length is decided by the starting points of adjacent two rects
       .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
@@ -121,12 +186,13 @@ export class HomeComponent implements OnInit {
         d3.selectAll('rect')
           .transition().duration(200)
           .style("fill-opacity", 1); // change all the colors of rectangle back
+      })
+      .on('click', d => {
+        // this.piechartData = d.data;
+        // this.createPiechart(this.piechartData);
+        // this.initGraph(d.data.college);
+        console.log(d.data);
       });
-      // .on('click', d => {
-      //   this.piechartData = d.data;
-      //   this.createPiechart(this.piechartData);
-      //   console.log(d.data);
-      // });
 
     // the legend
     const legendsvg = d3.select('.legend'); // another svg on top of the main svg
@@ -179,12 +245,13 @@ export class HomeComponent implements OnInit {
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
-                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.name}</span></h6>
+                      <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.name} ${obj.level}</span></h6>
                     </div>
                   `});
 
     svg.call(tip);
 
   }
+
 }
 

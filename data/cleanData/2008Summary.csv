@@ -1,30 +1,30 @@
-Code,Name,Student level,Total,Men,Women,Unknown,Caucasian,Asian American,African American,Hispanic,Native American,Hawaiian/Pacific Isl,Multiracial,International,Unknown,All   African American,All    Native American,All Hawaiian/ Pac Isl,All Asian,Illinois,Non-Illinois,Part time,Full time
-KL ,"Agr, Cons, Env Sci ",Graduate ,486,223,263,0,246,19,14,14,0,186,7,181,305,33,453,,,,,,
-KL ,"Agr, Cons, Env Sci ",Undergraduate ,2336,1014,1319,3,1851,171,86,123,4,61,40,2219,117,43,2293,,,,,,
-KM ,Business ,Graduate ,946,575,366,5,365,101,20,30,0,407,23,455,491,5,941,,,,,,
-KM ,Business ,Undergraduate ,3003,1741,1260,2,1781,480,165,234,10,279,54,2526,477,26,2977,,,,,,
-KN ,Education ,Graduate ,759,237,521,1,364,42,115,54,7,165,12,453,306,201,558,,,,,,
-KN ,Education ,Undergraduate ,671,49,621,1,527,45,30,46,2,6,15,651,20,0,671,,,,,,
-KP ,Engineering ,Graduate ,2313,1907,405,1,762,161,28,39,1,1302,20,402,1911,68,2245,,,,,,
-KP ,Engineering ,Undergraduate ,5354,4495,851,8,3274,865,119,208,11,773,104,3988,1366,150,5204,,,,,,
-KR ,Fine & Applied Arts ,Graduate ,874,412,462,0,503,46,24,38,3,239,21,315,559,82,792,,,,,,
-KR ,Fine & Applied Arts ,Undergraduate ,1982,936,1046,0,1423,192,74,124,9,117,43,1716,266,46,1936,,,,,,
-KS ,Graduate College ,Graduate ,4,3,1,0,2,2,0,0,0,0,0,1,3,2,2,,,,,,
-KT ,Media ,Graduate ,102,41,61,0,41,6,9,11,0,33,2,38,64,10,92,,,,,,
-KT ,Media ,Undergraduate ,938,273,665,0,686,65,82,57,2,28,18,863,75,7,931,,,,,,
-KU ,Law ,Graduate ,43,25,18,0,0,1,0,0,0,42,0,0,43,2,41,,,,,,
-KU ,Law ,Professional ,581,325,256,0,327,58,46,39,5,22,84,391,190,6,575,,,,,,
-KV ,Liberal Arts & Sci ,Graduate ,2592,1344,1248,0,1290,157,69,108,7,929,32,526,2066,80,2512,,,,,,
-KV ,Liberal Arts & Sci ,Undergraduate ,12868,6270,6584,14,7699,1913,1142,1021,30,751,312,11633,1235,208,12660,,,,,,
-KW ,General Studies ,Undergraduate ,2016,1051,963,2,1163,279,176,156,3,194,45,1720,296,5,2011,,,,,,
-KY ,Applied Health Sci ,Graduate ,279,86,193,0,183,13,28,6,1,47,1,175,104,8,271,,,,,,
-KY ,Applied Health Sci ,Undergraduate ,1807,625,1180,2,1258,130,212,142,19,16,30,1707,100,23,1784,,,,,,
-LC ,Veterinary Medicine ,Graduate ,66,27,39,0,28,2,2,4,0,27,3,18,48,18,48,,,,,,
-LC ,Veterinary Medicine ,Professional ,451,92,359,0,287,15,4,7,2,2,134,365,86,11,440,,,,,,
-LE ,Institute of Aviation ,Graduate ,12,6,6,0,4,0,0,0,0,8,0,4,8,0,12,,,,,,
-LE ,Institute of Aviation ,Undergraduate ,197,179,18,0,157,14,7,16,0,0,3,180,17,6,191,,,,,,
-LG ,Labor & Empl. Rel. ,Graduate ,188,58,130,0,105,17,20,7,1,38,0,121,67,2,186,,,,,,
-LL ,School of Social Work ,Graduate ,263,31,232,0,182,13,34,9,1,17,7,229,34,3,260,,,,,,
-LN ,Continuing Education ,Graduate ,71,23,48,0,57,2,7,3,0,0,2,0,71,57,14,,,,,,
-LN ,Continuing Education ,Undergraduate ,1,1,0,0,1,0,0,0,0,0,0,0,1,0,1,,,,,,
-LP ,Library & Info Sci ,Graduate ,292,80,212,0,201,26,11,8,2,37,7,172,120,24,268,,,,,,
+Code,Name,Student level,Total,Men,Women,Unknown,Caucasian,Asian American,African American,Hispanic,Native American,International,Unknown,Illinois,Non-Illinois,Part time,Full time
+KL ,"Agr, Cons, Env Sci ",Graduate ,486,223,263,0,246,19,14,14,0,186,7,181,305,33,453
+KL ,"Agr, Cons, Env Sci ",Undergraduate ,2336,1014,1319,3,1851,171,86,123,4,61,40,2219,117,43,2293
+KM ,Business ,Graduate ,946,575,366,5,365,101,20,30,0,407,23,455,491,5,941
+KM ,Business ,Undergraduate ,3003,1741,1260,2,1781,480,165,234,10,279,54,2526,477,26,2977
+KN ,Education ,Graduate ,759,237,521,1,364,42,115,54,7,165,12,453,306,201,558
+KN ,Education ,Undergraduate ,671,49,621,1,527,45,30,46,2,6,15,651,20,0,671
+KP ,Engineering ,Graduate ,2313,1907,405,1,762,161,28,39,1,1302,20,402,1911,68,2245
+KP ,Engineering ,Undergraduate ,5354,4495,851,8,3274,865,119,208,11,773,104,3988,1366,150,5204
+KR ,Fine & Applied Arts ,Graduate ,874,412,462,0,503,46,24,38,3,239,21,315,559,82,792
+KR ,Fine & Applied Arts ,Undergraduate ,1982,936,1046,0,1423,192,74,124,9,117,43,1716,266,46,1936
+KS ,Graduate College ,Graduate ,4,3,1,0,2,2,0,0,0,0,0,1,3,2,2
+KT ,Media ,Graduate ,102,41,61,0,41,6,9,11,0,33,2,38,64,10,92
+KT ,Media ,Undergraduate ,938,273,665,0,686,65,82,57,2,28,18,863,75,7,931
+KU ,Law ,Graduate ,43,25,18,0,0,1,0,0,0,42,0,0,43,2,41
+KU ,Law ,Professional ,581,325,256,0,327,58,46,39,5,22,84,391,190,6,575
+KV ,Liberal Arts & Sci ,Graduate ,2592,1344,1248,0,1290,157,69,108,7,929,32,526,2066,80,2512
+KV ,Liberal Arts & Sci ,Undergraduate ,12868,6270,6584,14,7699,1913,1142,1021,30,751,312,11633,1235,208,12660
+KW ,General Studies ,Undergraduate ,2016,1051,963,2,1163,279,176,156,3,194,45,1720,296,5,2011
+KY ,Applied Health Sci ,Graduate ,279,86,193,0,183,13,28,6,1,47,1,175,104,8,271
+KY ,Applied Health Sci ,Undergraduate ,1807,625,1180,2,1258,130,212,142,19,16,30,1707,100,23,1784
+LC ,Veterinary Medicine ,Graduate ,66,27,39,0,28,2,2,4,0,27,3,18,48,18,48
+LC ,Veterinary Medicine ,Professional ,451,92,359,0,287,15,4,7,2,2,134,365,86,11,440
+LE ,Institute of Aviation ,Graduate ,12,6,6,0,4,0,0,0,0,8,0,4,8,0,12
+LE ,Institute of Aviation ,Undergraduate ,197,179,18,0,157,14,7,16,0,0,3,180,17,6,191
+LG ,Labor & Empl. Rel. ,Graduate ,188,58,130,0,105,17,20,7,1,38,0,121,67,2,186
+LL ,School of Social Work ,Graduate ,263,31,232,0,182,13,34,9,1,17,7,229,34,3,260
+LN ,Continuing Education ,Graduate ,71,23,48,0,57,2,7,3,0,0,2,0,71,57,14
+LN ,Continuing Education ,Undergraduate ,1,1,0,0,1,0,0,0,0,0,0,0,1,0,1
+LP ,Library & Info Sci ,Graduate ,292,80,212,0,201,26,11,8,2,37,7,172,120,24,268

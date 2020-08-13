@@ -41,20 +41,20 @@
     
 
     <!-- rows for introduction -->
-    <section class="row">
-        <div class="col-12">
-            <h3>Introduction</h3>
-        </div>
-    </section>
+  <section class="row">
+    <div class="col-12">
+      <h3>Introduction</h3>
+    </div>
+  </section>
     <div class="row">
-        <div class="col-12">
-            <p>
-                The University of Illinois at Urbana-Champaign has one of the most diverse college student bodies in the world. However,
-                while some majors have a motley of demographics, other programs are more concentrated. This tool aims to provide information
-                on the raw data, context for historical norms and racial norms, and progression of diversity within fields.
-                Below, we have overall statistics of every college.
-            </p>
-        </div>
+      <div class="col-12">
+        <p>
+              The University of Illinois at Urbana-Champaign has one of the most diverse college student bodies in the world. However,
+              while some majors have a motley of demographics, other programs are more concentrated. This tool aims to provide information
+              on the raw data, context for historical norms and racial norms, and progression of diversity within fields.
+              Below, we have overall statistics of every college.
+        </p>
+      </div>
     </div>
 
 
@@ -90,24 +90,92 @@
         </div>
     </div>
 
-    <!-- legend group is drawn here -->
-    <section class="row justify-content-center">
-        <div class="col-12">
-          <svg class="legend" style="width: 100%; height: 50px">
-    
-          </svg>
-        </div>
-      </section>
-    
-    
-      <!-- the section where the main bar chart is drawn -->
-      <section class="row justify-content-center">
-        <div class="col-12">
-          <svg class="canvas" style="width: 102%; height: 1000px" [ngStyle]="{'height': svgHeight}">
-    
-          </svg>
-        </div>
-      </section>
+  <section class="row justify-content-center">
+    <div class="col-lg-8 col-md-12 col-sm-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a [class]="'nav-link' + (showUndergrad ? ' active' : '')" (click)="toggleGraph(true)">Undergraduate</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (!showUndergrad ? ' active' : '')" (click)="toggleGraph(false)">Graduate / Professional Programs</a>
+        </li>
+      </ul>
+      <br>
+    </div>
+  </section>
 
+  <!-- legend group is drawn here -->
+  <section class="row justify-content-center">
+    <div class="col-12">
+      <svg class="legend" style="width: 100%; height: 50px">
 
+      </svg>
+    </div>
+  </section>
+    
+    
+  <!-- the section where the main bar chart is drawn -->
+  <section class="row justify-content-center">
+    <div class="col-12">
+      <svg class="canvas" style="width: 102%; height: 1000px" [ngStyle]="{'height': svgHeight}">
+
+      </svg>
+    </div>
+  </section>
+
+  <!-- tabs for line graphs for history -->
+  <section class="row justify-content-center">
+    <div class="col-lg-8 col-md-12 col-sm-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KV' ? ' active' : '')" (click)="chooseLineGraph('KV')">LAS</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KP' ? ' active' : '')" (click)="chooseLineGraph('KP')">ENGR</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KM' ? ' active' : '')" (click)="chooseLineGraph('KM')">BUS</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KL' ? ' active' : '')" (click)="chooseLineGraph('KL')">ACES</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KW' ? ' active' : '')" (click)="chooseLineGraph('KW')">DGS</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KY' ? ' active' : '')" (click)="chooseLineGraph('KY')">AHS</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KR' ? ' active' : '')" (click)="chooseLineGraph('KR')">FAA</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KT' ? ' active' : '')" (click)="chooseLineGraph('KT')">MEDIA</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'KN' ? ' active' : '')" (click)="chooseLineGraph('KN')">EDUC</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="'nav-link' + (lineChoice === 'LL' ? ' active' : '')" (click)="chooseLineGraph('LL')">SOCW</a>
+        </li>
+      </ul>
+      <br>
+    </div>
+  </section>
+
+  <!-- line graphs -->
+  <section class="row justify-content-center">
+    <div class="col-12">
+      <canvas baseChart
+        [datasets]="lineChartData" 
+        [labels]="lineChartLabels" 
+        [options]="lineChartOptions"
+        [colors]="lineChartColors" 
+        [legend]="lineChartLegend" 
+        [chartType]="lineChartType" 
+        [plugins]="lineChartPlugins"
+        [colors]="lineChartColors">
+        >
+      </canvas>
+    </div>
+  </section>
 </div>
