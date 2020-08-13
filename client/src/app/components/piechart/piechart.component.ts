@@ -141,7 +141,6 @@ export class PiechartComponent implements OnInit, OnChanges {
     };
     
     const handleMouseOut = (d,i,n) => {  // make the part back to its original color after mouseout
-      //console.log(n[i]);
       d3.select(n[i])
         .transition('changeSliceFill').duration(200)
           .attr('fill', color(d.data.race));

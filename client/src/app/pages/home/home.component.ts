@@ -175,18 +175,11 @@ export class HomeComponent implements OnInit {
     const tip = d3Tip()
       .attr("class", "d3-tip")
       .html(d => {
-        // console.log(d);
         const d2 = d[1] - d[0]; // the count of specific race in this major
         const obj = d.data;  // original Object
         const half = d.data.total / 2;
         const third = d.data.total * 2 / 3;
-        let key;
-        // if (d.data.majorCode == 93 && d[0] == 18) {
-        //   key = Object.keys(obj).find(key => {
-        //     return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
-        //   });
-        // } else {
-        key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
+        let key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
 
         return ` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >

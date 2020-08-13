@@ -76,8 +76,6 @@ export class LineCollegeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('line college');
-    console.log(typeof this.majorCode);
     for (let i = 2004; i <= 2019; ++i) {
       this.lineChartLabels.push(i);
     }
@@ -86,7 +84,6 @@ export class LineCollegeComponent implements OnInit {
 
   initLineGraph(): void {
     let labels = ['Caucasian', 'Asian American', 'African American', 'Hispanic', 'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown'];
-    console.log(combinedData);
     if (this.level === 'undergrad') {
       for (let i = 0; i < labels.length; ++i) {
         this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['undergradTotal'][this.majorCode][i]['data'];

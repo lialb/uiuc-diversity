@@ -221,7 +221,6 @@ export class CollegeComponent implements OnInit {
                               this.majorName = d.data.major;
                               this.majorCode = d.data.majorCode.toString();
                               this.showPieChart = true;
-                              console.log(d.data);
                             });
                     
     // the legend
@@ -262,7 +261,6 @@ export class CollegeComponent implements OnInit {
     const tip = d3Tip()
                 .attr("class", "d3-tip")
                 .html(d => {
-                  // console.log(d);
                   const d2 = d[1] - d[0]; // the count of specific race in this major
                   const obj = d.data;  // original Object
                   const half = d.data.total / 2;
