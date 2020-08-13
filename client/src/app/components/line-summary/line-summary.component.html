@@ -2,36 +2,51 @@
   <!-- tabs for line graphs for history -->
   <section class="row justify-content-center">
     <div class="col-lg-8 col-md-12 col-sm-12">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs tabs-main">
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KV' ? ' active' : '')" (click)="chooseLineGraph('KV')">LAS</a>
+          <a [class]="'nav-link' + (lineChoice === 'KV' ? ' active' : '')" (click)="chooseLineGraph('KV', 'Liberal Arts and Sciences')">LAS</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KP' ? ' active' : '')" (click)="chooseLineGraph('KP')">ENGR</a>
+          <a [class]="'nav-link' + (lineChoice === 'KP' ? ' active' : '')" (click)="chooseLineGraph('KP', 'Grainger College of Engineering')">ENGR</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KM' ? ' active' : '')" (click)="chooseLineGraph('KM')">BUS</a>
+          <a [class]="'nav-link' + (lineChoice === 'KM' ? ' active' : '')" (click)="chooseLineGraph('KM', 'Gies College of Business')">BUS</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KL' ? ' active' : '')" (click)="chooseLineGraph('KL')">ACES</a>
+          <a [class]="'nav-link' + (lineChoice === 'KL' ? ' active' : '')" (click)="chooseLineGraph('KL', 'Agricultural, Consumer, and Environmental Sciences')">ACES</a>
+        </li>
+        <li class="nav-item" *ngIf="showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'KW' ? ' active' : '')" (click)="chooseLineGraph('KW', 'Division of General Studies')">DGS</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KW' ? ' active' : '')" (click)="chooseLineGraph('KW')">DGS</a>
+          <a [class]="'nav-link' + (lineChoice === 'KY' ? ' active' : '')" (click)="chooseLineGraph('KY', 'Applied Health Sciences')">AHS</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KY' ? ' active' : '')" (click)="chooseLineGraph('KY')">AHS</a>
+          <a [class]="'nav-link' + (lineChoice === 'KR' ? ' active' : '')" (click)="chooseLineGraph('KR', 'Fine and Applied Arts')">FAA</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KR' ? ' active' : '')" (click)="chooseLineGraph('KR')">FAA</a>
+          <a [class]="'nav-link' + (lineChoice === 'KT' ? ' active' : '')" (click)="chooseLineGraph('KT', 'College of Media')">MEDIA</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KT' ? ' active' : '')" (click)="chooseLineGraph('KT')">MEDIA</a>
+          <a [class]="'nav-link' + (lineChoice === 'KN' ? ' active' : '')" (click)="chooseLineGraph('KN', 'College of Education')">EDUC</a>
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'KN' ? ' active' : '')" (click)="chooseLineGraph('KN')">EDUC</a>
+          <a [class]="'nav-link' + (lineChoice === 'LL' ? ' active' : '')" (click)="chooseLineGraph('LL', 'School of Social Work')">SOCW</a>
         </li>
-        <li class="nav-item">
-          <a [class]="'nav-link' + (lineChoice === 'LL' ? ' active' : '')" (click)="chooseLineGraph('LL')">SOCW</a>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'LC' ? ' active' : '')" (click)="chooseLineGraph('LC', 'College of Veterinary Medicine')">VM</a>
+        </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'LP' ? ' active' : '')" (click)="chooseLineGraph('LP', 'School of Information Sciences')">IS</a>
+        </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'LT' ? ' active' : '')" (click)="chooseLineGraph('LT', 'Carle Illinois College of Medicine')">MED</a>
+        </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'KU' ? ' active' : '')" (click)="chooseLineGraph('KU', 'College of Law')">LAW</a>
+        </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'KS' ? ' active' : '')" (click)="chooseLineGraph('KS', 'Graduate College')">GRAD</a>
         </li>
       </ul>
       <br>
@@ -40,7 +55,8 @@
 
   <!-- line graphs -->
   <section class="row justify-content-center">
-    <h4>Undergraduate Demographics Over the Last 15 Years</h4>
+    <h4 *ngIf="showUndergrad">{{ collegeName }} Undergraduate Demographics Over the Last 15 Years</h4>
+    <h4 *ngIf="!showUndergrad">{{ collegeName }} Graduate/Professional Demographics Over the Last 15 Years</h4>
     <div class="col-12">
       <canvas baseChart
         [datasets]="lineChartData" 

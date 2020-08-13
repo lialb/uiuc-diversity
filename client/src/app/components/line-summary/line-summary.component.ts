@@ -13,15 +13,15 @@ export class LineSummaryComponent implements OnInit {
   @Input() showUndergrad: boolean;
 
   lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Caucasian' },
-    { data: [], label: 'Asian American' },
-    { data: [], label: 'African American' },
-    { data: [], label: 'Hispanic' },
-    { data: [], label: 'Native American' },
-    { data: [], label: 'Hawaiian/ Pacific Isl' },
-    { data: [], label: 'Multiracial' },
-    { data: [], label: 'International' },
-    { data: [], label: 'Unknown' },
+    { data: [], label: 'Caucasian', fill: false },
+    { data: [], label: 'Asian American', fill: false },
+    { data: [], label: 'African American', fill: false },
+    { data: [], label: 'Hispanic', fill: false },
+    { data: [], label: 'Native American', fill: false },
+    { data: [], label: 'Hawaiian/ Pacific Isl', fill: false },
+    { data: [], label: 'Multiracial', fill: false },
+    { data: [], label: 'International', fill: false },
+    { data: [], label: 'Unknown', fill: false },
   ];
 
 
@@ -31,8 +31,34 @@ export class LineSummaryComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,255,0,0.28)',
+      borderColor: '#4e79a7',
+    },
+    {
+      borderColor: '#f28e2c',
+    },
+    {
+      borderColor: '#e15759',
+    },
+    {
+      borderColor: '#76b7b2',
+    },
+    {
+      borderColor: '#59a14f',
+    },
+    {
+      borderColor: '#edc949',
+    },
+    {
+      borderColor: '#af7aa1',
+    },
+    {
+      borderColor: '#ff9da7',
+    },
+    {
+      borderColor: '#9c755f',
+    },
+    {
+      borderColor: '#bab0ab',
     },
   ];
   lineChartLabels = [];
@@ -42,7 +68,8 @@ export class LineSummaryComponent implements OnInit {
 
   lineChoice = 'KV'; // Default is LAS
   
-  lineColors = [];
+  // lineColors = [ccebc5ffed6f];
+  collegeName = 'Liberal Arts and Sciences';
 
   constructor() { }
 
@@ -67,8 +94,9 @@ export class LineSummaryComponent implements OnInit {
 
   }
 
-  chooseLineGraph(choice: string): void {
+  chooseLineGraph(choice: string, name): void {
     this.lineChoice = choice;
+    this.collegeName = name;
     this.initLineChart();
   }
 }

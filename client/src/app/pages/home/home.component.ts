@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
     // color is a function
     
     const keys = Object.keys(collegeArray[0]).slice(5) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
-    const color = d3.scaleOrdinal(d3['schemeSet3']).domain(keys);  //scaleOrdinal 9 colors for 9 races
+    const color = d3.scaleOrdinal(d3['schemeTableau10']).domain(keys);  //scaleOrdinal 9 colors for 9 races
 
     // config data
     const stack = d3.stack().keys(keys); //generate stacks
