@@ -47,11 +47,12 @@ export class HomeComponent implements OnInit {
 
   initGraph(): void {
     const collegeArray = this.showUndergrad ? data['default']['undergradTotal'] : data['default']['gradTotal'];
-    d3.selectAll('g').remove();
+    d3.selectAll('.once').remove();
 
     collegeArray.sort((a, b) => b.total - a.total)
     const svg = d3.select("div#container")
               .append("svg")
+              .attr('class', 'once')
               .attr("preserveAspectRatio", "xMinYMin meet")
               .attr("viewBox", "0 0 1100 550")
               .classed("svg-content", true);
@@ -137,11 +138,13 @@ export class HomeComponent implements OnInit {
       })
 
     // the legend
+    d3.select('.legendOnce').remove();
     const legendsvg = d3.select("div#legend-container")
-              .append("svg")
-              .attr("preserveAspectRatio", "xMinYMin meet")
-              .attr("viewBox", "0 0 1000 50")
-              .classed("svg-content", true);// another svg on top of the main svg
+                        .append("svg")
+                        .attr('class', 'legendOnce')
+                        .attr("preserveAspectRatio", "xMinYMin meet")
+                        .attr("viewBox", "0 0 1000 50")
+                        .classed("svg-content", true);// another svg on top of the main svg
     const legendGroup = legendsvg.append('g').attr('transform', `translate(50, 0)`);
     // like x,y axis, legend is just created here, waiting to be called in a group
     const legend = legendColor().shapePadding(90) //d3.legendColor() doesn't work for some reason, so had to install another dependency
