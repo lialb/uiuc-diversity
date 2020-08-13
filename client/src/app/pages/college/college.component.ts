@@ -25,7 +25,7 @@ interface margins {
 export class CollegeComponent implements OnInit {
 
   selectedCollege: any = {};
-  collegeAbbreviation: string = '';
+  collegeAbbreviation: string = 'LAS';
   collegeData: Array<Object> = colleges.colleges;
   collegeDescription: string = '';
   collegeCode: string = 'KV';
@@ -295,6 +295,53 @@ export class CollegeComponent implements OnInit {
           .attr('stroke-width', 2)
           .transition().duration(750)
           .attrTween("d", arcTweenEnter);
+
+
+    const legend = legendColor()
+                    .shape('path', d3.symbol().type(d3.symbolCircle)())
+                    .shapePadding(10)
+                    .scale(color);
+    const legendGroup = svg.append('g')
+                           .attr('transform', `translate(${this.graphMargin.left + 500}, ${this.svgHeight + 90})`)
+    legendGroup.call(legend); //call the legend
+    legendGroup.selectAll('text')  //configure the text
+              .attr('fill', 'black')
+              .attr('font-size', 12);
+
+
+    const tip = d3Tip()
+              .attr("class", "d3-tip")
+              .html(d => {    
+                return` 
+                  <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
+                    <h5 style="font-size: 1.5rem">${d.data.race}</h5>
+                    <h6><strong style="font-size: 1.2rem">${d.data.count}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
+                    <h6><strong style="font-size: 1.2rem">${(d.data.count * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${d.data.major} ${this.level !== 'nondegree' ? d.data.degree : ''}</span></h6>
+                  </div>
+                `});
+    pieGraph.call(tip);
+    const handleMouseOver = (d,i,n) => {
+      //console.log(n[i]);
+      d3.select(n[i])
+        .transition('changeSliceFill').duration(300)
+          .attr('fill', '#fff');
+    };
+    
+    const handleMouseOut = (d,i,n) => {
+      //console.log(n[i]);
+      d3.select(n[i])
+        .transition('changeSliceFill').duration(200)
+          .attr('fill', color(d.data.race));
+    };
+    pieGraph.selectAll('path')
+            .on('mouseover', (d,i,n) => {
+              tip.show(d, n[i]);
+              handleMouseOver(d, i, n);
+            })
+            .on('mouseout', (d,i,n) => {
+              tip.hide();
+              handleMouseOut(d, i, n);
+            })
   }
   
 }
