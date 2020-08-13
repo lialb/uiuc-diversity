@@ -54,8 +54,8 @@ export class HomeComponent implements OnInit {
 
     //the main group where everything is drawn
     const graph = svg.append("g")
-      //  .attr("transform", "translate(" + this.graphMargin.left + "," + this.graphMargin.top + ")");
-      .attr("transform", `translate(${this.graphMargin.left}, 0)`);
+      .style('width', '100%')
+      .attr("transform", `translate(${this.graphMargin.left -50 }, 0)`);
 
 
     // x, y, color, stack are all functions
@@ -154,7 +154,6 @@ export class HomeComponent implements OnInit {
 
     // calling xAxis, yAxis in the group 
     graph.append('g')
-      //  .attr('transform', 'translate(-10,2)')
       .call(yAxis).selectAll('text')
       .attr('fill', 'black')
       .attr('transform', 'translate(-5,0)');

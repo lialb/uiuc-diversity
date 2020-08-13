@@ -184,7 +184,6 @@ export class CollegeComponent implements OnInit {
                             })
                             .on('click', d => {
                               this.piechartData = d.data;
-                              this.createPiechart(this.piechartData);
                               this.majorName = d.data.major;
                               this.majorCode = d.data.majorCode.toString();
                               this.showPieChart = true;
@@ -249,105 +248,4 @@ export class CollegeComponent implements OnInit {
     svg.call(tip);
   
   }
-
-
-
-  createPiechart({ major, majorCode, college, degree, year }) {
-    const svg = d3.select('.canvas');
-    svg.select('.piechart').remove();
-    //the main group where everything is drawn
-    const pieGraph = svg.append("g")
-                     .attr('class', 'piechart')
-                     .attr("transform", `translate(${this.graphMargin.left + 200}, ${this.svgHeight + 200})`);
-
-    let educationLevel: string;
-    switch(this.level) {
-      case 'undergrad':
-        educationLevel = 'undergraduate';
-        break;
-      case 'masters':
-        educationLevel = 'masters';
-        break;
-      case 'doctorate':
-        educationLevel = "doctorate";
-        break;
-      default:
-        educationLevel = 'nondegree';
-        break;
-    }
-
-    const selectedData = data['default'][college][educationLevel].filter(entry => entry.majorCode === majorCode);
-    console.log(selectedData);
-
-    const pie = d3.pie().sort(null).value(d => d.count);
-    const arcPath = d3.arc().innerRadius(75).outerRadius(150);
-    const color = d3.scaleOrdinal(d3['schemeSet3']).domain(selectedData.map(entry => entry.race));
-
-    const paths = pieGraph.selectAll('path').data(pie(selectedData));
-
-    const arcTweenEnter = (d) => {
-      let i = d3.interpolate(d.endAngle, d.startAngle);
-
-      return function(t) {
-        d.startAngle = i(t);
-        return arcPath(d);
-      };
-    };
-    paths.enter()
-          .append('path')
-          .attr('d', arcPath)
-          .attr('fill', d => color(d.data.race))
-          .attr('stroke', 'white')
-          .attr('stroke-width', 2)
-          .transition().duration(750)
-          .attrTween("d", arcTweenEnter);
-
-
-    const legend = legendColor()
-                    .shape('path', d3.symbol().type(d3.symbolCircle)())
-                    .shapePadding(10)
-                    .scale(color);
-    const legendGroup = svg.append('g')
-                           .attr('transform', `translate(${this.graphMargin.left + 500}, ${this.svgHeight + 90})`)
-    legendGroup.call(legend); //call the legend
-    legendGroup.selectAll('text')  //configure the text
-              .attr('fill', 'black')
-              .attr('font-size', 12);
-
-
-    const tip = d3Tip()
-              .attr("class", "d3-tip")
-              .html(d => {    
-                return` 
-                  <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
-                    <h5 style="font-size: 1.5rem">${d.data.race}</h5>
-                    <h6><strong style="font-size: 1.2rem">${d.data.count}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
-                    <h6><strong style="font-size: 1.2rem">${(d.data.count * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${d.data.major} ${this.level !== 'nondegree' ? d.data.degree : ''}</span></h6>
-                  </div>
-                `});
-    pieGraph.call(tip);
-    const handleMouseOver = (d,i,n) => {
-      //console.log(n[i]);
-      d3.select(n[i])
-        .transition('changeSliceFill').duration(300)
-          .attr('fill', '#fff');
-    };
-    
-    const handleMouseOut = (d,i,n) => {
-      //console.log(n[i]);
-      d3.select(n[i])
-        .transition('changeSliceFill').duration(200)
-          .attr('fill', color(d.data.race));
-    };
-    pieGraph.selectAll('path')
-            .on('mouseover', (d,i,n) => {
-              tip.show(d, n[i]);
-              handleMouseOver(d, i, n);
-            })
-            .on('mouseout', (d,i,n) => {
-              tip.hide();
-              handleMouseOut(d, i, n);
-            })
-  }
-  
 }
