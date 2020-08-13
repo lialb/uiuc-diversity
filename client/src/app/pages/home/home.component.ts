@@ -50,12 +50,16 @@ export class HomeComponent implements OnInit {
     d3.selectAll('g').remove();
 
     collegeArray.sort((a, b) => b.total - a.total)
-    const svg = d3.select('.canvas');
+    const svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 550")
+              .classed("svg-content", true);
 
     //the main group where everything is drawn
     const graph = svg.append("g")
       .style('width', '100%')
-      .attr("transform", `translate(${this.graphMargin.left -50 }, 0)`);
+      .attr("transform", `translate(150, 0)`);
 
 
     // x, y, color, stack are all functions
@@ -121,7 +125,6 @@ export class HomeComponent implements OnInit {
       .on("mouseover", (d, i, n) => {
         tip.show(d, n[i]);
         svg.selectAll('rect').filter(h => h !== d)  // select all other rectangles not is not the one hovered over
-          .style("cursor", "pointer")
           .transition().duration(100)
           .style("fill-opacity", 0.3);  // change their opacity to highlight the emphasized one.
       })
@@ -132,16 +135,14 @@ export class HomeComponent implements OnInit {
           .transition().duration(200)
           .style("fill-opacity", 1); // change all the colors of rectangle back
       })
-      .on('click', d => {
-        // this.piechartData = d.data;
-        // this.createPiechart(this.piechartData);
-        // this.initGraph(d.data.college);
-        console.log(d.data);
-      });
 
     // the legend
-    const legendsvg = d3.select('.legend'); // another svg on top of the main svg
-    const legendGroup = legendsvg.append('g').attr('transform', `translate(200, 0)`);
+    const legendsvg = d3.select("div#legend-container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1000 50")
+              .classed("svg-content", true);// another svg on top of the main svg
+    const legendGroup = legendsvg.append('g').attr('transform', `translate(50, 0)`);
     // like x,y axis, legend is just created here, waiting to be called in a group
     const legend = legendColor().shapePadding(90) //d3.legendColor() doesn't work for some reason, so had to install another dependency
       .orient("horizontal")
