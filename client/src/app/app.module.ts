@@ -16,7 +16,8 @@ import { LineCollegeComponent } from './components/line-college/line-college.com
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'college/:college/:level', component: CollegeComponent }
+  { path: 'college/:college/:level', component: CollegeComponent },
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({
