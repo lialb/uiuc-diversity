@@ -59,25 +59,30 @@
   </section>
 
 
-  <!-- legend group is drawn here -->
+
+  <!-- legend section -->
   <section class="row justify-content-center">
     <div class="col-12">
-      <svg class="legend" style="width: 100%; height: 50px">
+      <div id="legend-container" class="svg-container">
+      </div>
+      <!-- <svg class="legend" style="width: 100%; height: 50px">
 
-      </svg>
+      </svg> -->
     </div>
   </section>
-    
-  
+
+
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center">
-    <div class="col-12">
-      <svg class="canvas" style="width: 102%; height: 600px" [ngStyle]="{'height': svgHeight}">
-      </svg>
+    <div class="col-12" >
+      <div id="container" class="svg-container">
+      </div>
+      
+      <!-- <svg class="canvas" style="width: 102%; height: 900px" >
+
+      </svg> -->
     </div>
   </section>
-
-
 
   <!-- line graphs -->
   <app-line-summary [showUndergrad]="true"></app-line-summary>

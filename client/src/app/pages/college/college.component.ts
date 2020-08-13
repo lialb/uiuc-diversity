@@ -100,13 +100,47 @@ export class CollegeComponent implements OnInit {
       majorArray = data['default'][this.collegeCode].nondegreeTotal;
     }
 
-    majorArray.sort((a, b) => b.total - a.total)
-    const svg = d3.select('.canvas');
+    majorArray.sort((a, b) => b.total - a.total);
+
+    let svg: any;
+
+    if (majorArray.length > 20) {
+      svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 900")
+              .classed("svg-content", true);
+    } else if (majorArray.length >= 8) {
+      svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 500")
+              .classed("svg-content", true);
+    } else if (majorArray.length >= 4)  {
+      svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 200")
+              .classed("svg-content", true);
+    } else if (majorArray.length >= 2) {
+      svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 250")
+              .classed("svg-content", true);
+    } else {
+      svg = d3.select("div#container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 150")
+              .classed("svg-content", true);
+    }
+
 
     //the main group where everything is drawn
     const graph = svg.append("g")
                     //  .attr("transform", "translate(" + this.graphMargin.left + "," + this.graphMargin.top + ")");
-                     .attr("transform", `translate(${this.graphMargin.left}, 0)`);
+                     .attr("transform", `translate(${this.graphMargin.left-15}, 0)`);
     
 
     // x, y, color, stack are all functions
@@ -191,8 +225,13 @@ export class CollegeComponent implements OnInit {
                             });
                     
     // the legend
-    const legendsvg = d3.select('.legend'); // another svg on top of the main svg
-    const legendGroup = legendsvg.append('g').attr('transform', `translate(200, 0)`);
+    var legendsvg = d3.select("div#legend-container")
+              .append("svg")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1100 40")
+              .classed("svg-content", true);
+
+    const legendGroup = legendsvg.append('g').attr('transform', `translate(180, 0)`);
     // like x,y axis, legend is just created here, waiting to be called in a group
     const legend = legendColor().shapePadding(90) //d3.legendColor() doesn't work for some reason, so had to install another dependency
                                 .orient("horizontal")
@@ -242,6 +281,7 @@ export class CollegeComponent implements OnInit {
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
                       <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${this.level !== 'nondegree' ? obj.degree : ''}</span></h6>
+                      <h6>(Click to show the pie chart and line plot below)</h6>
                     </div>
                   `});
 

@@ -25,8 +25,14 @@ export class PiechartComponent implements OnInit, OnChanges {
   }
 
   createPiechart({ majorCode, college }, level) { // destructure the incoming input, grabbing only majorCode and college
-    const svg = d3.select('.piecanvas');
-    svg.select('.piechart').remove();
+    d3.select('.once').remove();
+    const svg = d3.select("div#piecontainer")
+                .append("svg")
+                .attr('class', 'once')
+                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 600 380")
+                .classed("svg-content", true);
+
     //the main group where everything is drawn
 
     // let pieGraph;
@@ -46,7 +52,7 @@ export class PiechartComponent implements OnInit, OnChanges {
 
     const pieGraph = svg.append("g")
                   .attr('class', 'piechart')
-                  .attr("transform", `translate(400, 150)`);
+                  .attr("transform", `translate(200, 150)`);
     let educationLevel: string;
 
     switch(level) { //////////////
@@ -109,7 +115,7 @@ export class PiechartComponent implements OnInit, OnChanges {
     //                   .attr('transform', `translate(700, 280)`);
     // }
     const legendGroup = svg.append('g')
-                     .attr('transform', 'translate(700, 30)');
+                     .attr('transform', 'translate(400, 30)');
     legendGroup.call(legend); //call the legend
     legendGroup.selectAll('text')  //configure the text
               .attr('fill', 'black')
