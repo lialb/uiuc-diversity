@@ -148,8 +148,8 @@ export class HomeComponent implements OnInit {
       .tickValues([0, d3.max(collegeArray, d => d.total)]);
 
     // color is a function
-    const keys = Object.keys(collegeArray[0]).slice(5); //keys required to make stacked bar chart, which is each race, getting rid of keys like major
-    console.log(keys);
+    
+    const keys = Object.keys(collegeArray[0]).slice(5) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
     const color = d3.scaleOrdinal(d3['schemeSet3']).domain(keys);  //scaleOrdinal 9 colors for 9 races
 
     // config data
@@ -233,13 +233,12 @@ export class HomeComponent implements OnInit {
         const half = d.data.total / 2;
         const third = d.data.total * 2 / 3;
         let key;
-        if (d.data.majorCode == 93 && d[0] == 18) {
-          key = Object.keys(obj).find(key => {
-            return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
-          });
-        } else {
-          key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
-        }
+        // if (d.data.majorCode == 93 && d[0] == 18) {
+        //   key = Object.keys(obj).find(key => {
+        //     return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
+        //   });
+        // } else {
+        key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
 
         return ` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
