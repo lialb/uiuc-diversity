@@ -161,7 +161,12 @@ def writeToJSON(data, document):
 def getCombinedCollegeData():
     data = {}
     for college in colleges:
-        data[college] = {'undergraduate': [], 'masters': [], 'doctorate': [], 'nondegree': [], 'undergradTotal' : [], 'mastersTotal': [], 'doctorateTotal': [], 'nondegreeTotal': []}
+# [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+        data[college] = { 'undergradTotal': {}, 
+        'mastersTotal': {},
+        'doctorateTotal': {},
+        'nondegreeTotal': {} }
+    # data = { 'KP': 'undergradTotal: { 112: [{'data': [], 'label': caucasian }] } }
     year = 2019
     while year >= 2004:
         document = str(year)
@@ -179,67 +184,100 @@ def getCombinedCollegeData():
                 majorCode = int(row[4])
                 major = row[5].strip()
                 degree = row[3].strip()
-
-                if len(data[collegeCode]['undergraduate']) > 0 and majorCode == data[collegeCode]['undergraduate'][-1]['majorCode'] and degree in undergradDegrees: # Check if same major code, different concentration
-                    total = int(row[8])
-                    for i in range(len(races)):
-                        count = int(row[12 + i])
-                        data[collegeCode]['undergraduate'][-9 + i]['count'] += count # Add previous values for each race
-                        data[collegeCode]['undergraduate'][-9 + i]['total'] += total 
-                        data[collegeCode]['undergradTotal'][-1][races[i]] += count # For total in one major
-                    data[collegeCode]['undergradTotal'][-1]['total'] += total # update totals
-                    continue
-                elif len(data[collegeCode]['masters']) > 0 and majorCode == data[collegeCode]['masters'][-1]['majorCode'] and degree == data[collegeCode]['masters'][-1]['degree'] and degree in mastersDegrees:
-                    total = int(row[8])
-                    for i in range(len(races)):
-                        count = int(row[12 + i])
-                        data[collegeCode]['masters'][-9 + i]['count'] += count
-                        data[collegeCode]['masters'][-9 + i]['total'] += total
-                        data[collegeCode]['mastersTotal'][-1][races[i]] += count
-                    data[collegeCode]['mastersTotal'][-1]['total'] += total
-                    continue
-                elif len(data[collegeCode]['doctorate']) > 0 and majorCode == data[collegeCode]['doctorate'][-1]['majorCode'] and degree == data[collegeCode]['doctorate'][-1]['degree'] and degree in doctorateDegrees:
-                    total = int(row[8])
-                    for i in range(len(races)):
-                        count = int(row[12 + i])
-                        data[collegeCode]['doctorate'][-9 + i]['count'] += count
-                        data[collegeCode]['doctorate'][-9 + i]['total'] += total
-                        data[collegeCode]['doctorateTotal'][-1][races[i]] += count
-                    data[collegeCode]['doctorateTotal'][-1]['total'] += total
-                    continue
-                elif len(data[collegeCode]['nondegree']) > 0 and majorCode == data[collegeCode]['nondegree'][-1]['majorCode'] and degree in nondegrees:
-                    total = int(row[8])
-                    for i in range(len(races)):
-                        count = int(row[12 + i])
-                        data[collegeCode]['nondegree'][-9 + i]['count'] += count
-                        data[collegeCode]['nondegree'][-9 + i]['total'] += total
-                        data[collegeCode]['nondegreeTotal'][-1][races[i]] += count
-                    data[collegeCode]['nondegreeTotal'][-1]['total'] += total
-                    continue
-
-                # if it is a new major, add it
-                total = {'major': major, 'degree': degree, 'college' : collegeCode, 'majorCode': majorCode, 'year': year, 'total': int(row[8])}
-                for i in range(len(races)):
-                    count = int(row[12 + i])
-                    temp = {'race': races[i], 'count' : count, 'total': int(row[8]), 'major': major, 'degree': degree, 'college' : collegeCode, 'majorCode': majorCode, 'year': year}
+                if year <= 2009:
                     if degree in undergradDegrees:
-                        data[collegeCode]['undergraduate'].append(temp)
-                    elif degree in mastersDegrees:
-                        data[collegeCode]['masters'].append(temp)
-                    elif degree in doctorateDegrees:
-                        data[collegeCode]['doctorate'].append(temp)
-                    else:
-                        data[collegeCode]['nondegree'].append(temp)
-                    total[races[i]] = count
+                        if majorCode not in data[collegeCode]['undergradTotal']:
+                            data[collegeCode]['undergradTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
 
+                            for i in range(len(races) - 2):
+                                data[collegeCode]['undergradTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                        else:
+                            for i in range(len(races) - 2):
+                                if data[collegeCode]['undergradTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] is not None:
+                                    data[collegeCode]['undergradTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] += int(row[12 + i].strip())
+                                else:
+                                    data[collegeCode]['undergradTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+
+                    elif degree in mastersDegrees:
+                        if majorCode not in data[collegeCode]['mastersTotal']:
+                            data[collegeCode]['mastersTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                            for i in range(len(races) - 2):
+                                data[collegeCode]['mastersTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                        else:
+                            for i in range(len(races) - 2):
+                                if data[collegeCode]['mastersTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] is not None:
+                                    data[collegeCode]['mastersTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] += int(row[12 + i].strip())
+                                else:
+                                    data[collegeCode]['mastersTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                    elif degree in doctorateDegrees:
+                        if majorCode not in data[collegeCode]['doctorateTotal']:
+                            data[collegeCode]['doctorateTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                            for i in range(len(races) - 2):
+                                data[collegeCode]['doctorateTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                        else:
+                            for i in range(len(races) - 2):
+                                if data[collegeCode]['doctorateTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] is not None:
+                                    data[collegeCode]['doctorateTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] += int(row[12 + i].strip())
+                                else:
+                                    data[collegeCode]['doctorateTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                    elif degree in nondegrees:
+                        if majorCode not in data[collegeCode]['nondegreeTotal']:
+                            data[collegeCode]['nondegreeTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                            for i in range(len(races) - 2):
+                                data[collegeCode]['nondegreeTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                        else:
+                            for i in range(len(races) - 2):
+                                if data[collegeCode]['nondegreeTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] is not None:
+                                    data[collegeCode]['nondegreeTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] += int(row[12 + i].strip())
+                                else:
+                                    data[collegeCode]['nondegreeTotal'][majorCode][i if i < 5 else i + 2]['data'][year - 2004] = int(row[12 + i].strip())
+                    continue
                 if degree in undergradDegrees:
-                    data[collegeCode]['undergradTotal'].append(total)
+                    if majorCode not in data[collegeCode]['undergradTotal']:
+                        data[collegeCode]['undergradTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+
+                        for i in range(len(races)):
+                            data[collegeCode]['undergradTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+                    else:
+                        for i in range(len(races)):
+                            if data[collegeCode]['undergradTotal'][majorCode][i]['data'][year - 2004] is not None:
+                                data[collegeCode]['undergradTotal'][majorCode][i]['data'][year - 2004] += int(row[12 + i].strip())
+                            else:
+                                data[collegeCode]['undergradTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+
                 elif degree in mastersDegrees:
-                    data[collegeCode]['mastersTotal'].append(total)
+                    if majorCode not in data[collegeCode]['mastersTotal']:
+                        data[collegeCode]['mastersTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                        for i in range(len(races)):
+                            data[collegeCode]['mastersTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+                    else:
+                        for i in range(len(races)):
+                            if data[collegeCode]['mastersTotal'][majorCode][i]['data'][year - 2004] is not None:
+                                data[collegeCode]['mastersTotal'][majorCode][i]['data'][year - 2004] += int(row[12 + i].strip())
+                            else:
+                                data[collegeCode]['mastersTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
                 elif degree in doctorateDegrees:
-                    data[collegeCode]['doctorateTotal'].append(total)
-                else:
-                    data[collegeCode]['nondegreeTotal'].append(total)
+                    if majorCode not in data[collegeCode]['doctorateTotal']:
+                        data[collegeCode]['doctorateTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                        for i in range(len(races)):
+                            data[collegeCode]['doctorateTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+                    else:
+                        for i in range(len(races)):
+                            if data[collegeCode]['doctorateTotal'][majorCode][i]['data'][year - 2004] is not None:
+                                data[collegeCode]['doctorateTotal'][majorCode][i]['data'][year - 2004] += int(row[12 + i].strip())
+                            else:
+                                data[collegeCode]['doctorateTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+                elif degree in nondegrees:
+                    if majorCode not in data[collegeCode]['nondegreeTotal']:
+                        data[collegeCode]['nondegreeTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
+                        for i in range(len(races)):
+                            data[collegeCode]['nondegreeTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
+                    else:
+                        for i in range(len(races)):
+                            if data[collegeCode]['nondegreeTotal'][majorCode][i]['data'][year - 2004] is not None:
+                                data[collegeCode]['nondegreeTotal'][majorCode][i]['data'][year - 2004] += int(row[12 + i].strip())
+                            else:
+                                data[collegeCode]['nondegreeTotal'][majorCode][i]['data'][year - 2004] = int(row[12 + i].strip())
         print(year)
         year -= 1
     writeToJSON(data, 'combinedCollege')
@@ -290,4 +328,5 @@ def getCombinedSummaryData():
 
     writeToJSON(data, 'combinedSummary')
 
-getCombinedSummaryData()
+# getCombinedSummaryData()
+getCombinedCollegeData()

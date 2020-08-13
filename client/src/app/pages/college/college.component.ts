@@ -49,6 +49,9 @@ export class CollegeComponent implements OnInit {
   showDoctorate = true;
   showNondegree = true;
 
+  majorName = '';
+  majorCode = '';
+
   constructor(private ar: ActivatedRoute, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false; // reload on param change
   }
@@ -182,6 +185,9 @@ export class CollegeComponent implements OnInit {
                             .on('click', d => {
                               this.piechartData = d.data;
                               this.createPiechart(this.piechartData);
+                              this.majorName = d.data.major;
+                              this.majorCode = d.data.majorCode.toString();
+                              this.showPieChart = true;
                               console.log(d.data);
                             });
                     

@@ -1,0 +1,19 @@
+<div>
+  <section class="row justify-content-center">
+    <h4 *ngIf="true">{{ majorName }} {{ level.charAt(0).toUpperCase() + level.slice(1) }} Demographics Over the Last 15 Years</h4>
+    <div class="col-12">
+      <canvas baseChart
+        [datasets]="lineChartData" 
+        [labels]="lineChartLabels" 
+        [options]="lineChartOptions"
+        [colors]="lineChartColors" 
+        [legend]="lineChartLegend" 
+        [chartType]="lineChartType" 
+        [plugins]="lineChartPlugins"
+        [colors]="lineChartColors">
+        >
+      </canvas>
+    </div>
+    <p class="text-muted" style="font-size: 0.7rem;">* Note: Data for Hawaiian/Pacific Islander and Multiracial is not reported before 2010. Click on the legends to interact with the visualization!</p>
+  </section>
+</div>

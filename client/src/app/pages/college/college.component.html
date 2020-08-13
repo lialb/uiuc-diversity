@@ -65,8 +65,15 @@
     <div class="col-12">
       <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
     </div>
-    <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
   </section>
+  
+  <!-- major history section -->
+  <section class="row">
+    <div class="col-12">
+      <app-line-college *ngIf="showPieChart" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+    </div>
+  </section>
+
 </div>
 
 
