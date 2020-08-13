@@ -1,9 +1,4 @@
 <div class="container" style="margin-top: 1rem;">
-    <!-- <div class="row text-center">
-        <div class="col-12">
-            <h2>Welcome!</h2>
-        </div>
-    </div> -->
 
   <!-- rows for introduction -->
   <section class="row">
@@ -14,15 +9,16 @@
     <div class="row">
       <div class="col-12">
         <p>
-              The University of Illinois at Urbana-Champaign has one of the most diverse college student bodies in the world. However,
-              while some majors have a wide array of demographics, other programs are more concentrated. This tool aims to provide information
-              on the raw data, context for historical norms and racial norms, and progression of diversity within fields.
+              The University of Illinois at Urbana-Champaign has one of the most diverse collegiate student bodies in the world. However,
+              while some majors have a wide array of demographics, other programs are more concentrated in racial disparities. This tool aims to provide information
+              on the raw data, context for historical norms and racial norms, and progression of diversity within fields. We seek to 
+              encourage discussion on racial inequality in higher education and in the professional workplace setting.
               Below, we have overall statistics of every college from publically available data (see About for more information).
         </p>
         <p>
-            Hover over any part of the bar chart to show the more details. 
+            Hover over any part of the bar chart and line graph to show more details. 
             Use the menu <strong><span style="font-size: large; color: #123870;">in the top left corner</span></strong> to see data on different colleges within UIUC.
-            Within different colleges, click on the bar chart to learn more about the major!
+            Within different colleges, click on the bar chart to learn more!
         </p>
       </div>
     </div>
@@ -42,16 +38,11 @@
     </div>
   </section>
 
-
-
   <!-- legend section -->
   <section class="row justify-content-center">
+    <p *ngIf="!showUndergrad" class="text-muted" style="font-size: 0.7rem;">* Note: Graduate and Professional degrees within the same colleges are combined in the same bar.</p>
     <div class="col-12">
-      <div id="legend-container" class="svg-container">
-      </div>
-      <!-- <svg class="legend" style="width: 100%; height: 50px">
-
-      </svg> -->
+      <div id="legend-container" class="svg-container"></div>
     </div>
   </section>
 
@@ -59,14 +50,10 @@
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center">
     <div class="col-12" >
-      <div id="container" class="svg-container">
-      </div>
-      
-      <!-- <svg class="canvas" style="width: 102%; height: 900px" >
-
-      </svg> -->
+      <div id="container" class="svg-container"></div>
     </div>
   </section>
+
 
   <!-- line graphs -->
   <app-line-summary [showUndergrad]="true"></app-line-summary>

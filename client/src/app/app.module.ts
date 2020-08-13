@@ -10,7 +10,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { CollegeComponent } from './pages/college/college.component';
 import { PiechartComponent } from './components/piechart/piechart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PersonComponent } from './components/person/person.component';
 import { LineSummaryComponent } from './components/line-summary/line-summary.component';
 import { LineCollegeComponent } from './components/line-college/line-college.component';
 
@@ -29,7 +28,6 @@ const routes: Routes = [
     CollegeComponent,
     PiechartComponent,
     NavbarComponent,
-    PersonComponent,
     LineSummaryComponent,
     LineCollegeComponent
   ],

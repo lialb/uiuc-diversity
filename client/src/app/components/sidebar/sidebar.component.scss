@@ -51,7 +51,7 @@ $UIUCBlue: #123870;
 $skyblue: #328CC1;
 
 .college-button {
-  background-color: transparent; /* Green */
+  background-color: transparent;
   border: none;
   color: rgba(255,255,255,0.9);
   border-color: none;
@@ -64,7 +64,7 @@ $skyblue: #328CC1;
   margin-left: 2%;
   cursor: pointer;
   box-sizing: border-box;
-  border-bottom: solid 1px;
+  border-bottom: solid 2px;
 }
 
 .college-button:hover {
