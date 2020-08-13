@@ -281,7 +281,7 @@ export class CollegeComponent implements OnInit {
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
                       <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${this.level !== 'nondegree' ? obj.degree : ''}</span></h6>
-                      <h6>(Click to show the pie chart and line plot below)</h6>
+                      <h6 style="font-size: .7rem">(Click to show the more details)</h6>
                     </div>
                   `});
 
