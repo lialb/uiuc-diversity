@@ -53,7 +53,7 @@
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center">
     <div class="col-12" >
-      <svg class="canvas" style="width: 102%; height: 1300px" >
+      <svg class="canvas" style="width: 102%; height: 900px" >
 
       </svg>
     </div>
@@ -61,12 +61,7 @@
 
 
   <!-- pie chart section -->
-  <section class="row">
-    <div class="col-12">
-      <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
-    </div>
-    <app-piechart *ngIf="showPieChart" [data]='majorData'></app-piechart>
-  </section>
-</div>
+  <app-piechart [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation"></app-piechart>
+
 
 
