@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
     }
     const y = d3.scaleBand()	// scaleBand for categorical data		
       .range([0, this.svgHeight - this.graphMargin.top - this.graphMargin.bottom])	// height of y-axis
-      .domain(collegeArray.map(entry => entry.major))  // domain should be an array of all the majors in this collge
+      .domain(collegeArray.map(entry => entry.name))  // domain should be an array of all the majors in this collge
       .paddingInner(0.2) // padding between each bar
       .paddingOuter(0.2) // padding to x-axis
       .align(0.1);
@@ -84,7 +84,8 @@ export class HomeComponent implements OnInit {
       .tickValues([0, d3.max(collegeArray, d => d.total)])
 
     // color is a function
-    const keys = Object.keys(collegeArray[0]).slice(6) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
+    
+    const keys = Object.keys(collegeArray[0]).slice(5) //keys required to make stacked bar chart, which is each race, getting rid of keys like major
     const color = d3.scaleOrdinal(d3['schemeSet3']).domain(keys);  //scaleOrdinal 9 colors for 9 races
 
     // config data
@@ -104,7 +105,7 @@ export class HomeComponent implements OnInit {
     let rects = bargroups.selectAll('rect')
       .data(d => d)  // super tricky here, it still loops 9 times 
       .enter().append("rect")
-      .attr("y", d => y(d.data.major)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
+      .attr("y", d => y(d.data.name)) // this d is not the same as the d above, sample: {0: 0, 1: 286, data: the actual original data before stacked}	    
       .attr("x", d => x(d[0])) // the coordinate where this rect starts
       .attr("width", d => x(d[1]) - x(d[0]))  // the length is decided by the starting points of adjacent two rects
       .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
@@ -167,13 +168,12 @@ export class HomeComponent implements OnInit {
         const half = d.data.total / 2;
         const third = d.data.total * 2 / 3;
         let key;
-        if (d.data.majorCode == 93 && d[0] == 18) {
-          key = Object.keys(obj).find(key => {
-            return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
-          });
-        } else {
-          key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
-        }
+        // if (d.data.majorCode == 93 && d[0] == 18) {
+        //   key = Object.keys(obj).find(key => {
+        //     return obj[key] === d2 && key !== 'total' && key !== 'Asian American'
+        //   });
+        // } else {
+        key = Object.keys(obj).find(key => obj[key] === d2 && key !== 'total');  // finding the race, which is the key, by value, if there is only one race in this major, total will be returned, and we don't want that. 
 
         return ` 
                     <div style="background-color: rgba(0,0,0,0.7); padding: 8px; color: white; text-align: center; position: relative; bottom: 0.2rem" >
