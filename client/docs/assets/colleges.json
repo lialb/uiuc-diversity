@@ -1,0 +1,79 @@
+{
+    "colleges" : [
+        {
+            "abbreviation" : "ACES",
+            "code" : "KL",
+            "name" : "Agricultural, Consumer, and Environmental Sciences"
+        },
+        {
+            "abbreviation" : "AHS",
+            "code" : "KY",
+            "name" : "Applied Health Sciences"
+        },
+        {
+            "abbreviation" : "BUS",
+            "code" : "KM",
+            "name" : "Gies College of Business"
+        },
+        {
+            "abbreviation" : "DGS",
+            "code" : "KW",
+            "name" : "Division of General Studies"
+        },
+        {
+            "abbreviation" : "EDUC",
+            "code" : "KN",
+            "name" : "College of Education"
+        },
+        {
+            "abbreviation" : "ENGR",
+            "code" : "KP",
+            "name" : "Grainger College of Engineering"
+        },
+        {
+            "abbreviation" : "FAA",
+            "code" : "KR",
+            "name" : "Fine and Applied Arts"
+        },
+        {
+            "abbreviation" : "GRAD",
+            "code" : "KS",
+            "name" : "Graduate College"
+        },
+        {
+            "abbreviation" : "LAW",
+            "code" : "KU",
+            "name" : "College of Law"
+        },
+        {
+            "abbreviation" : "LAS",
+            "code" : "KV",
+            "name" : "Liberal Arts and Sciences"
+        },
+        {
+            "abbreviation" : "MEDIA",
+            "code" : "KT",
+            "name" : "College of Media"
+        },
+        {
+            "abbreviation" : "IS",
+            "code" : "LP",
+            "name" : "School of Information Sciences"
+        },
+        {
+            "abbreviation" : "SW",
+            "code" : "LL",
+            "name" : "School of Social Work"
+        },
+        {
+            "abbreviation" : "VM",
+            "code" : "LC",
+            "name" : "College of Veterinary Medicine"
+        },
+        {
+            "abbreviation" : "MED",
+            "code" : "LT",
+            "name" : "Carle Illinois College of Medicine"
+        }
+    ]
+}
