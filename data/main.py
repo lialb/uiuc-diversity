@@ -249,9 +249,7 @@ def getCombinedCollegeData():
 def getCombinedSummaryData():
     data = {}
     for college in colleges:
-        temp = [{'data': [None for _ in range(16)], 'label' : race} for race in races]
-        data[college] = { 'undergradTotal': temp, 'gradTotal': temp }
-    print(len(races))
+        data[college] = { 'undergradTotal': [{'data': [None for _ in range(16)], 'label' : race} for race in races], 'gradTotal': [{'data': [None for _ in range(16)], 'label' : race} for race in races] }
     # data = { 'KP' : 'undergradTotal' : [{'data': [], 'label': 'Caucasian'}]}
     year = 2019
     while year >= 2004:
@@ -280,7 +278,6 @@ def getCombinedSummaryData():
                         i += 1
 
                     continue
-                
                 for i in range(len(races)): 
                     if level == 'Undergraduate':
                         data[college]['undergradTotal'][i]['data'][year - 2004] = int(row[7 + i].strip())

@@ -11,6 +11,7 @@ import { CollegeComponent } from './pages/college/college.component';
 import { PiechartComponent } from './components/piechart/piechart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PersonComponent } from './components/person/person.component';
+import { LineSummaryComponent } from './components/line-summary/line-summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
     CollegeComponent,
     PiechartComponent,
     NavbarComponent,
-    PersonComponent
+    PersonComponent,
+    LineSummaryComponent
   ],
   imports: [
     BrowserModule,

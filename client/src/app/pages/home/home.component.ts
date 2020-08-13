@@ -4,10 +4,6 @@ import d3Tip from 'd3-tip'; //d3.tip tip is not a function automatically importe
 import { legendColor } from 'd3-svg-legend';
 // import * as colleges from '../../../assets/colleges.json';
 import * as data from '../../../assets/json/2019Summary.json';
-import { Color, Label } from 'ng2-charts';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import * as combinedData from '../../../assets/json/combinedSummary.json';
-import { range } from 'rxjs';
 
 
 interface margins {
@@ -37,63 +33,12 @@ export class HomeComponent implements OnInit {
 
   showUndergrad = true;
 
-  lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Caucasian' },
-    { data: [], label: 'Asian American' },
-    { data: [], label: 'African American' },
-    { data: [], label: 'Hispanic' },
-    { data: [], label: 'Native American' },
-    { data: [], label: 'Hawaiian/ Pacific Isl' },
-    { data: [], label: 'Multiracial' },
-    { data: [], label: 'International' },
-    { data: [], label: 'Unknown' },
-  ];
-
-  lineChartLabels = [];
-
-  lineChartOptions = {
-    responsive: true,
-  };
-
-  lineChartColors: Color[] = [
-    {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,255,0,0.28)',
-    },
-  ];
-
-  lineChartLegend = true;
-  lineChartPlugins = [];
-  lineChartType = 'line';
-
-  lineChoice = 'KV'; // Default is LAS
-  
-  lineColors = [];
-
   constructor() { }
 
   ngOnInit() {
-    for (let i = 2004; i <= 2019; ++i) {
-      this.lineChartLabels.push(i);
-    }
     this.initGraph();
-    this.initLineChart();
   }
 
-  initLineChart(): void {
-    let labels = ['Caucasian', 'Asian American', 'African American', 'Hispanic', 'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown'];
-    console.log(combinedData['default'][this.lineChoice]['undergradTotal'][0]['data']);
-    for (let i = 0; i < labels.length; ++i) {
-      this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['undergradTotal'][i]['data'];
-    }
-
-  }
-
-  chooseLineGraph(choice: string): void {
-    console.log(choice);
-    this.lineChoice = choice;
-    this.initLineChart();
-  }
 
   toggleGraph(choice: boolean): void {
     this.showUndergrad = choice;
