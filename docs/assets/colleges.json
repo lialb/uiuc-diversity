@@ -74,6 +74,16 @@
             "abbreviation" : "VM",
             "code" : "LC",
             "name" : "College of Veterinary Medicine"
+        },
+        {
+            "abbreviation" : "LER",
+            "code" : "LG",
+            "name" : "Labor & Employer Relations"
+        },
+        {
+            "abbreviation" : "CITL",
+            "code" : "LN",
+            "name" : "Center for Innovation in Teaching and Learning"
         }
     ]
 }
