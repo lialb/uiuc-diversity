@@ -4,13 +4,15 @@
   <!-- title of the page -->
   <section class="row justify-content-center">
     <div class="col-12 text-center">
-      <h3>{{ collegeAbbreviation }} - {{ collegeDescription }}</h3>
+      <br>
+      <h2><strong style="color: #123870;">{{ collegeAbbreviation }}</strong> - {{ collegeDescription }}</h2>
     </div>
   </section>
 
 
   <!-- the tab to navigate between each education level -->
   <section class="row justify-content-center">
+    <p></p>
     <div class="col-lg-8 col-md-12 col-sm-12">
       <ul class="nav nav-tabs">
         <li class="nav-item" *ngIf="showUndergrad">
@@ -30,7 +32,6 @@
     </div>
   </section>
 
-
   <!-- note section for MS and Non-degrees -->
   <section class="row justify-content-center">
     <div class="col-lg-8 col-md-12 col-sm-12">
@@ -39,35 +40,29 @@
     </div>
   </section>
 
-
   <!-- the svg to draw legend -->
   <section class="row justify-content-center">
     <div class="col-12">
-      <div id="legend-container" class="svg-container">
-      </div>
-      <!-- <svg class="legend" style="width: 100%; height: 50px">
-
-      </svg> -->
+      <div id="legend-container" class="svg-container"></div>
     </div>
   </section>
-
 
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center" style="margin-top: -3%;">
     <div class="col-12" >
-      <div id="container" class="svg-container">
-      </div>
-      
-      <!-- <svg class="canvas" style="width: 102%; height: 900px" >
-
-      </svg> -->
+      <div id="container" class="svg-container"></div>
     </div>
   </section>
 
+  <!-- instructions -->
+  <section class="justify-content-center" *ngIf="!showPieChart">
+    <p style="font-size: x-large; text-align: center;">
+      <strong><span style="font-size: xx-large; color: #123870;">Click</span></strong> on the bar graphs
+    </p>
+  </section>
 
   <!-- pie chart section -->
-  <app-piechart [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation"></app-piechart>
-
+  <app-piechart *ngIf="showPieChart" [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation"></app-piechart>
   
   <!-- major history section -->
   <app-line-college *ngIf="showPieChart" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
