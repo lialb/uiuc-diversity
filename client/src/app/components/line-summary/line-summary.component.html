@@ -48,6 +48,12 @@
         <li class="nav-item" *ngIf="!showUndergrad">
           <a [class]="'nav-link' + (lineChoice === 'KS' ? ' active' : '')" (click)="chooseLineGraph('KS', 'Graduate College')">GRAD</a>
         </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'LG' ? ' active' : '')" (click)="chooseLineGraph('LG', 'Labor & Employer Relations')">LER</a>
+        </li>
+        <li class="nav-item" *ngIf="!showUndergrad">
+          <a [class]="'nav-link' + (lineChoice === 'LN' ? ' active' : '')" (click)="chooseLineGraph('LN', 'Center for Innovation in Teaching and Learning')">CITL</a>
+        </li>
       </ul>
       <br>
     </div>

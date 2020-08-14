@@ -43,15 +43,13 @@ export class SidebarComponent implements OnInit {
 
   selectCollege(abbreviation: string): void {
     let level: string = 'undergrad';
-    if (abbreviation === 'DGS') {
+    if (abbreviation === 'DGS' || abbreviation === 'CITL') {
       level = 'nondegree';
     } else if (['GRAD', 'MED'].indexOf(abbreviation) > -1) {
       level = 'doctorate';
-    } else if (['IS', 'VM', 'LAW'].indexOf(abbreviation) > -1) {
+    } else if (['IS', 'VM', 'LAW', 'LER'].indexOf(abbreviation) > -1) {
       level = 'masters';
-    }
+    } 
     this.router.navigate(['/college', abbreviation, level]);
   }
-
-
 }

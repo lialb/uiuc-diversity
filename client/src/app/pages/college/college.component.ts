@@ -77,6 +77,13 @@ export class CollegeComponent implements OnInit {
       this.showNondegree = false;
     } else if (['IS', 'VM', 'LAW'].indexOf(this.collegeAbbreviation) > -1) {
       this.showUndergrad = false;
+    } else if (this.collegeAbbreviation === 'CITL') {
+      this.showUndergrad = false;
+      this.showMasters = false;
+      this.showDoctorate = false;
+    } else if (this.collegeAbbreviation === 'LER') {
+      this.showUndergrad = false;
+      this.showNondegree = false;
     }
 
     this.selectedCollege = this.collegeData.find(college => college['abbreviation'] === this.collegeAbbreviation);

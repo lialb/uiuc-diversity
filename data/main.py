@@ -182,7 +182,8 @@ def getCombinedCollegeData():
                 if collegeCode in ('LE', 'LM'): # For Institute of Aviation, Provost
                     continue
                 majorCode = int(row[4])
-                major = row[5].strip()
+                if majorCode == 338: # major code changed for psychology
+                    majorCode = 5535
                 degree = row[3].strip()
                 if year <= 2009:
                     if degree in undergradDegrees:
