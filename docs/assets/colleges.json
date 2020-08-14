@@ -51,6 +51,11 @@
             "name" : "Liberal Arts and Sciences"
         },
         {
+            "abbreviation" : "MED",
+            "code" : "LT",
+            "name" : "Carle Illinois College of Medicine"
+        },
+        {
             "abbreviation" : "MEDIA",
             "code" : "KT",
             "name" : "College of Media"
@@ -69,11 +74,6 @@
             "abbreviation" : "VM",
             "code" : "LC",
             "name" : "College of Veterinary Medicine"
-        },
-        {
-            "abbreviation" : "MED",
-            "code" : "LT",
-            "name" : "Carle Illinois College of Medicine"
         }
     ]
 }
