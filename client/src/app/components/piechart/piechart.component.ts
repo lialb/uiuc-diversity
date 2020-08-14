@@ -93,7 +93,7 @@ export class PiechartComponent implements OnInit, OnChanges {
           .attr('fill', d => color(d.data.race))
           .attr('stroke', 'white')
           .attr('stroke-width', 2)
-          .transition().duration(200)
+          .transition().duration(700)
           .attrTween("d", arcTweenEnter);
 
 
