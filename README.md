@@ -14,4 +14,4 @@ All data is public and comes from the [Division of Management Information](http:
 
 ## Building and Deploying
 
-The frontend is built with Angular and is located in the `client` directory. This website is currently hosted on Github Pages. To deploy, run `./build.sh` in the root directory. 
+The frontend is built with Angular and is located in the `client` directory. This website is currently hosted on Github Pages from the master branch and `docs` directory. To deploy, run `./build.sh` in the root directory. 
