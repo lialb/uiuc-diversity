@@ -204,8 +204,8 @@ export class CollegeComponent implements OnInit {
                             .attr("height", y.bandwidth()) // height is bandwidth, remember bandwidth here is a function.
                             .on("mouseover", (d,i,n) => {
                               tip.show(d, n[i]);
+                              svg.selectAll('rect').style("cursor", "pointer")
                               svg.selectAll('rect').filter(h => h !== d)  // select all other rectangles not is not the one hovered over
-                                .style("cursor", "pointer")
                                 .transition().duration(100)
                                 .style("fill-opacity", 0.3);  // change their opacity to highlight the emphasized one.
                             })
@@ -213,7 +213,7 @@ export class CollegeComponent implements OnInit {
                             .on("mouseout", (d,i,n) => {
                               tip.hide();
                               d3.selectAll('rect')
-                                .transition().duration(200)
+                                .transition().duration(100)
                                 .style("fill-opacity", 1); // change all the colors of rectangle back
                             })
                             .on('click', d => {
@@ -279,7 +279,7 @@ export class CollegeComponent implements OnInit {
                       <h5 style="font-size: 1.5rem">${key}</h5>
                       <h6><strong style="font-size: 1.2rem">${d2}</strong><span style="font-size: 0.8rem"> out of </span><strong style="font-size: 1.2rem">${d.data.total}</strong><span style="font-size: 0.7rem"> students</span></h6>
                       <h6><strong style="font-size: 1.2rem">${(d2 * 100 / d.data.total).toFixed(2)}%</strong><span style="font-size: 0.8rem"> in ${obj.major} ${this.level !== 'nondegree' ? obj.degree : ''}</span></h6>
-                      <h6 style="font-size: .7rem">(Click to show the more details)</h6>
+                      <h6 style="font-size: .7rem">(Click to show more details)</h6>
                     </div>
                   `});
 
