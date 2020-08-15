@@ -93,7 +93,7 @@ export class PiechartComponent implements OnInit, OnChanges {
           .attr('fill', d => color(d.data.race))
           .attr('stroke', 'white')
           .attr('stroke-width', 2)
-          .transition().duration(750)
+          .transition().duration(700)
           .attrTween("d", arcTweenEnter);
 
 
@@ -136,7 +136,7 @@ export class PiechartComponent implements OnInit, OnChanges {
     pieGraph.call(tip);
     const handleMouseOver = (d,i,n) => {  // make the hovered part of pie chart white
       d3.select(n[i])
-        .transition('changeSliceFill').duration(300)  // make sure it doesn't intervene the enter tween animation by naming this transition
+        .transition('changeSliceFill').duration(200)  // make sure it doesn't intervene the enter tween animation by naming this transition
           .attr('fill', '#fff');
     };
     
