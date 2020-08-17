@@ -65,7 +65,9 @@
   <app-piechart *ngIf="showPieChart" [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation"></app-piechart>
   
   <!-- major history section -->
-  <app-line-college *ngIf="showPieChart" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+  <app-line-college *ngIf="showPieChart" [showLocation]="false" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+
+  <app-line-college *ngIf="showPieChart" [showLocation]="true" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
 
 </div>
 

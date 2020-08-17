@@ -330,4 +330,153 @@ def getCombinedSummaryData():
     writeToJSON(data, 'combinedSummary')
 
 # getCombinedSummaryData()
-getCombinedCollegeData()
+# getCombinedCollegeData()
+
+def getLocationInfo():
+    data = {}
+    labels = ['In State', 'Out of State', 'International']
+    for college in colleges:
+        data[college] = { 'undergradTotal': [{'data': [None for _ in range(16)], 'label' : label} for label in labels], 'gradTotal': [{'data': [None for _ in range(16)], 'label' : label} for label in labels] }
+    year = 2019
+    while year >= 2004:
+        document = str(year) + 'Summary'
+        with open('./cleanData/' + document + '.csv') as f:
+            r = csv.reader(f)
+            next(r)
+            for row in r:
+                college = row[0].strip()
+                if college not in data:
+                    continue
+                level = row[2].strip()
+                if year <= 2009: # no hawaiian / pacific islander or multiracial data from 2004 to 2009
+                    inState = int(row[14].strip())
+                    international = int(row[12].strip())
+                    outState = int(row[15].strip()) - international
+                elif year < 2014:
+                    inState = int(row[18].strip())
+                    international = int(row[14].strip())
+                    outState = int(row[19].strip()) - international
+                elif year >= 2014:
+                    inState = int(row[20].strip())
+                    international = int(row[14].strip())
+                    outState = int(row[21].strip()) - international
+
+                if level == 'Undergraduate':
+                    data[college]['undergradTotal'][0]['data'][year - 2004] = inState
+                    data[college]['undergradTotal'][1]['data'][year - 2004] = outState
+                    data[college]['undergradTotal'][2]['data'][year - 2004] = international
+                else:
+                    data[college]['gradTotal'][0]['data'][year - 2004] = inState
+                    data[college]['gradTotal'][1]['data'][year - 2004] = outState
+                    data[college]['gradTotal'][2]['data'][year - 2004] = international
+        print(year)        
+        year -= 1
+    writeToJSON(data, 'locationSummary')
+
+def getMajorLocationInfo():
+    data = {}
+    labels = ['In State', 'Out of State', 'International']
+    for college in colleges:
+    # [{'data': [None for _ in range(16)], 'label' : label} for label in labels]
+        data[college] = { 'undergradTotal': {}, 
+        'mastersTotal': {},
+        'doctorateTotal': {},
+        'nondegreeTotal': {} }
+    year = 2019
+    while year >= 2004:
+        document = str(year)
+        with open('./cleanData/' + document + '.csv') as f:
+            r = csv.reader(f)
+            next(r)
+            for row in r:
+                if row[2].strip() == '':
+                    continue
+                
+                collegeCode = row[1].strip()
+                if collegeCode in ('LE', 'LM'): # For Institute of Aviation, Provost
+                    continue
+                majorCode = int(row[4])
+                if majorCode == 338: # major code changed for psychology
+                    majorCode = 5535
+                degree = row[3].strip()
+                instate, international, outstate = 0, 0, 0
+                if year <= 2009: # 
+                    inState = int(row[19].strip())
+                    international = int(row[17].strip())
+                    outState = int(row[20].strip()) - international
+                elif year < 2014:
+                    inState = int(row[23].strip())
+                    international = int(row[19].strip())
+                    outState = int(row[24].strip()) - international
+                elif year >= 2014:
+                    inState = int(row[25].strip())
+                    international = int(row[19].strip())
+                    outState = int(row[26].strip()) - international
+
+                if degree in undergradDegrees:
+                    if majorCode not in data[collegeCode]['undergradTotal']:
+                        data[collegeCode]['undergradTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : label} for label in labels]
+                        data[collegeCode]['undergradTotal'][majorCode][0]['data'][year - 2004] = inState
+                        data[collegeCode]['undergradTotal'][majorCode][1]['data'][year - 2004] = outState
+                        data[collegeCode]['undergradTotal'][majorCode][2]['data'][year - 2004] = international
+                    else:
+                        if data[collegeCode]['undergradTotal'][majorCode][0]['data'][year - 2004] is not None:
+                            data[collegeCode]['undergradTotal'][majorCode][0]['data'][year - 2004] += inState
+                            data[collegeCode]['undergradTotal'][majorCode][1]['data'][year - 2004] += outState
+                            data[collegeCode]['undergradTotal'][majorCode][2]['data'][year - 2004] += international
+                        else:
+                            data[collegeCode]['undergradTotal'][majorCode][0]['data'][year - 2004] = inState
+                            data[collegeCode]['undergradTotal'][majorCode][1]['data'][year - 2004] = outState
+                            data[collegeCode]['undergradTotal'][majorCode][2]['data'][year - 2004] = international
+                elif degree in mastersDegrees:
+                    if majorCode not in data[collegeCode]['mastersTotal']:
+                        data[collegeCode]['mastersTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : label} for label in labels]
+                        data[collegeCode]['mastersTotal'][majorCode][0]['data'][year - 2004] = inState
+                        data[collegeCode]['mastersTotal'][majorCode][1]['data'][year - 2004] = outState
+                        data[collegeCode]['mastersTotal'][majorCode][2]['data'][year - 2004] = international
+                    else:
+                        if data[collegeCode]['mastersTotal'][majorCode][0]['data'][year - 2004] is not None:
+                            data[collegeCode]['mastersTotal'][majorCode][0]['data'][year - 2004] += inState
+                            data[collegeCode]['mastersTotal'][majorCode][1]['data'][year - 2004] += outState
+                            data[collegeCode]['mastersTotal'][majorCode][2]['data'][year - 2004] += international
+                        else:
+                            data[collegeCode]['mastersTotal'][majorCode][0]['data'][year - 2004] = inState
+                            data[collegeCode]['mastersTotal'][majorCode][1]['data'][year - 2004] = outState
+                            data[collegeCode]['mastersTotal'][majorCode][2]['data'][year - 2004] = international
+                elif degree in doctorateDegrees:
+                    if majorCode not in data[collegeCode]['doctorateTotal']:
+                        data[collegeCode]['doctorateTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : label} for label in labels]
+                        data[collegeCode]['doctorateTotal'][majorCode][0]['data'][year - 2004] = inState
+                        data[collegeCode]['doctorateTotal'][majorCode][1]['data'][year - 2004] = outState
+                        data[collegeCode]['doctorateTotal'][majorCode][2]['data'][year - 2004] = international
+                    else:
+                        if data[collegeCode]['doctorateTotal'][majorCode][0]['data'][year - 2004] is not None:
+                            data[collegeCode]['doctorateTotal'][majorCode][0]['data'][year - 2004] += inState
+                            data[collegeCode]['doctorateTotal'][majorCode][1]['data'][year - 2004] += outState
+                            data[collegeCode]['doctorateTotal'][majorCode][2]['data'][year - 2004] += international
+                        else:
+                            data[collegeCode]['doctorateTotal'][majorCode][0]['data'][year - 2004] = inState
+                            data[collegeCode]['doctorateTotal'][majorCode][1]['data'][year - 2004] = outState
+                            data[collegeCode]['doctorateTotal'][majorCode][2]['data'][year - 2004] = international
+                elif degree in nondegrees:
+                    if majorCode not in data[collegeCode]['nondegreeTotal']:
+                        data[collegeCode]['nondegreeTotal'][majorCode] = [{'data': [None for _ in range(16)], 'label' : label} for label in labels]
+                        data[collegeCode]['nondegreeTotal'][majorCode][0]['data'][year - 2004] = inState
+                        data[collegeCode]['nondegreeTotal'][majorCode][1]['data'][year - 2004] = outState
+                        data[collegeCode]['nondegreeTotal'][majorCode][2]['data'][year - 2004] = international
+                    else:
+                        if data[collegeCode]['nondegreeTotal'][majorCode][0]['data'][year - 2004] is not None:
+                            data[collegeCode]['nondegreeTotal'][majorCode][0]['data'][year - 2004] += inState
+                            data[collegeCode]['nondegreeTotal'][majorCode][1]['data'][year - 2004] += outState
+                            data[collegeCode]['nondegreeTotal'][majorCode][2]['data'][year - 2004] += international
+                        else:
+                            data[collegeCode]['nondegreeTotal'][majorCode][0]['data'][year - 2004] = inState
+                            data[collegeCode]['nondegreeTotal'][majorCode][1]['data'][year - 2004] = outState
+                            data[collegeCode]['nondegreeTotal'][majorCode][2]['data'][year - 2004] = international
+
+                    
+        print(year)        
+        year -= 1
+    writeToJSON(data, 'locationMajor')
+
+getMajorLocationInfo()

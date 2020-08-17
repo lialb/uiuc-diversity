@@ -1,6 +1,7 @@
 <div>
   <section class="row justify-content-center">
-    <h3 *ngIf="true"><strong style="color: #123870">{{ majorName }}</strong> {{ level.charAt(0).toUpperCase() + level.slice(1) }} Demographics Over the Last 15 Years</h3>
+    <h3 *ngIf="!showLocation"><strong style="color: #123870">{{ majorName }}</strong> {{ level.charAt(0).toUpperCase() + level.slice(1) }} Demographics Over the Last 15 Years</h3>
+    <h3 *ngIf="showLocation"><strong style="color: #123870">{{ majorName }}</strong> {{ level.charAt(0).toUpperCase() + level.slice(1) }} Residency Over the Last 15 Years</h3>
     <div class="col-12">
       <canvas baseChart
         [datasets]="lineChartData" 
@@ -21,7 +22,7 @@
     <p style="font-size: x-large; text-align: center;">
       <strong><span style="font-size: xx-large; color: #123870;">Click</span></strong> on the legends to remove from line graph
     </p>
-    <p class="text-muted" style="font-size: 0.7rem;">* Note: Data for Hawaiian/Pacific Islander and Multiracial is not reported before 2010.</p>
+    <p class="text-muted" style="font-size: 0.7rem;" *ngIf="!showLocation">* Note: Data for Hawaiian/Pacific Islander and Multiracial is not reported before 2010.</p>
 
   </section>
 </div>

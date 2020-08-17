@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Color, Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import * as combinedData from '../../../assets/json/combinedSummary.json';
+import * as locationData from '../../../assets/json/locationSummary.json';
 
 @Component({
   selector: 'app-line-summary',
@@ -11,8 +12,10 @@ import * as combinedData from '../../../assets/json/combinedSummary.json';
 export class LineSummaryComponent implements OnInit {
 
   @Input() showUndergrad: boolean;
+  @Input() showLocation: boolean;
 
-  lineChartData: ChartDataSets[] = [
+  lineChartData: ChartDataSets[] =
+  [
     { data: [], label: 'Caucasian', fill: false },
     { data: [], label: 'Asian American', fill: false },
     { data: [], label: 'African American', fill: false },
@@ -74,21 +77,43 @@ export class LineSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (this.showLocation) {
+      this.lineChartData = 
+        [
+          { data: [], label: 'In State', fill: false },
+          { data: [], label: 'Out of State', fill: false },
+          { data: [], label: 'International', fill: false },
+        ];
+    }
     for (let i = 2004; i <= 2019; ++i) {
       this.lineChartLabels.push(i);
     }
+    console.log(this.lineChartData);
     this.initLineChart();
   }
 
   initLineChart(): void {
-    let labels = ['Caucasian', 'Asian American', 'African American', 'Hispanic', 'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown'];
-    if (this.showUndergrad) {
-      for (let i = 0; i < labels.length; ++i) {
-        this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['undergradTotal'][i]['data'];
+    if (!this.showLocation) {
+      let labels = ['Caucasian', 'Asian American', 'African American', 'Hispanic', 'Native American', 'Hawaiian/ Pacific Isl', 'Multiracial', 'International', 'Unknown'];
+      if (this.showUndergrad) {
+        for (let i = 0; i < labels.length; ++i) {
+          this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['undergradTotal'][i]['data'];
+        }
+      } else {
+        for (let i = 0; i < labels.length; ++i) {
+          this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['gradTotal'][i]['data'];
+        }
       }
     } else {
-      for (let i = 0; i < labels.length; ++i) {
-        this.lineChartData[i]['data'] = combinedData['default'][this.lineChoice]['gradTotal'][i]['data'];
+      let labels = ['In State', 'Out of State', 'International']
+      if (this.showUndergrad) {
+        for (let i = 0; i < labels.length; ++i) {
+          this.lineChartData[i]['data'] = locationData['default'][this.lineChoice]['undergradTotal'][i]['data'];
+        }
+      } else {
+        for (let i = 0; i < labels.length; ++i) {
+          this.lineChartData[i]['data'] = locationData['default'][this.lineChoice]['gradTotal'][i]['data'];
+        }
       }
     }
 
