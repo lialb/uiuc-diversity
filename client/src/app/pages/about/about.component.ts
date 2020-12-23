@@ -11,7 +11,7 @@ export class AboutComponent implements OnInit {
     {
       "name": "Albert",
       "picture": "albert.jpg",
-      "linkedin": "https://linkedin.com/in/albearli",
+      "linkedin": "https://linkedin.com/in/albs",
       "github": "https://github.com/albearli",
       "website": "https://lialbert.com"
     },
