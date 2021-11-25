@@ -68,6 +68,7 @@ export class LineCollegeComponent implements OnInit {
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType = "line";
+  currentYear = 2021;
 
   constructor() {}
 
@@ -83,7 +84,7 @@ export class LineCollegeComponent implements OnInit {
         { data: [], label: "International", fill: false },
       ];
     }
-    for (let i = 2004; i <= 2019; ++i) {
+    for (let i = 2004; i <= this.currentYear; ++i) {
       this.lineChartLabels.push(i);
     }
     this.initLineGraph();

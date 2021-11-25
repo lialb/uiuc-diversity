@@ -5,7 +5,7 @@ import * as d3 from "d3";
 import d3Tip from "d3-tip"; //d3.tip tip is not a function automatically imported with d3, d3-tip library is needed instead
 import { legendColor } from "d3-svg-legend";
 import * as colleges from "../../../assets/colleges.json";
-import * as data from "../../../assets/json/2019.json";
+import * as data from "../../../assets/json/2021.json";
 
 interface margins {
   left: number;
@@ -38,7 +38,7 @@ export class CollegeComponent implements OnInit {
   svgWidth = 400;
   svgHeight: number;
   barRange = 900;
-  piechartData;
+  piechartData: { major: string; majorCode: { toString: () => string; }; };
 
   showUndergrad = true;
   showMasters = true;

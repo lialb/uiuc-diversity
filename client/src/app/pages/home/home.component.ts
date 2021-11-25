@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as d3 from "d3";
 import d3Tip from "d3-tip"; //d3.tip tip is not a function automatically imported with d3, d3-tip library is needed instead
 import { legendColor } from "d3-svg-legend";
-import * as data from "../../../assets/json/2019Summary.json";
+import * as data from "../../../assets/json/2021Summary.json";
 
 interface margins {
   left: number;
