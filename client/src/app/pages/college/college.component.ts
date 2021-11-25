@@ -38,7 +38,7 @@ export class CollegeComponent implements OnInit {
   svgWidth = 400;
   svgHeight: number;
   barRange = 900;
-  piechartData: { major: string; majorCode: { toString: () => string; }; };
+  piechartData: { major: string; majorCode: { toString: () => string } };
 
   showUndergrad = true;
   showMasters = true;
@@ -91,7 +91,7 @@ export class CollegeComponent implements OnInit {
   }
 
   initGraph(): void {
-    let majorArray;
+    let majorArray: {}[];
 
     // select data based on tab
     if (this.level === "undergrad") {

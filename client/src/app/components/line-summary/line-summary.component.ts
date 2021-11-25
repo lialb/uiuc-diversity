@@ -85,7 +85,6 @@ export class LineSummaryComponent implements OnInit {
     for (let i = 2004; i <= this.currentYear; ++i) {
       this.lineChartLabels.push(i);
     }
-    console.log(this.lineChartData);
     this.initLineChart();
   }
 

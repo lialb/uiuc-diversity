@@ -2,13 +2,12 @@
   <section class="row justify-content-center">
     <h3 *ngIf="!showLocation">
       <strong style="color: #123870">{{ majorName }}</strong>
-      {{ level.charAt(0).toUpperCase() + level.slice(1) }} Demographics Over the
-      Last 15 Years
+      {{ level.charAt(0).toUpperCase() + level.slice(1) }} Demographics Since
+      2004
     </h3>
     <h3 *ngIf="showLocation">
       <strong style="color: #123870">{{ majorName }}</strong>
-      {{ level.charAt(0).toUpperCase() + level.slice(1) }} Residency Over the
-      Last 15 Years
+      {{ level.charAt(0).toUpperCase() + level.slice(1) }} Residency Since 2004
     </h3>
     <div class="col-12">
       <canvas
