@@ -1,66 +1,99 @@
-<div class="container" style="margin-top: 1rem;">
-
+<div class="container" style="margin-top: 1rem">
   <!-- rows for introduction -->
   <section class="row">
     <div class="col-12">
       <h3>Introduction</h3>
     </div>
   </section>
-    <div class="row">
-      <div class="col-12">
-        <p>
-              The University of Illinois at Urbana-Champaign has one of the most diverse collegiate student bodies in the world. However,
-              while some majors have a wide array of demographics, other programs are more concentrated in racial disparities. This tool aims to provide information
-              on the raw data, context for historical norms and racial norms, and progression of diversity within fields. We seek to 
-              encourage discussion on racial inequality in higher education and in the professional workplace setting.
-              Below, we have overall statistics of every college in 2019 from publicly available data (see About for more information).
-        </p>
-        <h3>
-          Instructions
-        </h3>
-      <p style="font-size: large;">
-          <strong><span style="font-size: x-large; color: #123870;">Hover</span></strong> over any part of the bar chart and line graph to show more details. <br>
-          Use the menu in <strong><span style="font-size: x-large; color: #123870;">top left corner</span></strong> to see <strong style="color: #123870">Major</strong> specific data.
+  <div class="row">
+    <div class="col-12">
+      <p>
+        The University of Illinois at Urbana-Champaign has one of the most
+        diverse collegiate student bodies in the world. However, while some
+        majors have a wide array of demographics, other programs are more
+        concentrated in racial disparities. This tool aims to provide
+        information on the raw data, context for historical norms and racial
+        norms, and progression of diversity within fields. We seek to encourage
+        discussion on racial inequality in higher education and in the
+        professional workplace setting. Below, we have overall statistics of
+        every college in 2019 from publicly available data (see About for more
+        information).
       </p>
-      </div>
+      <h3>Instructions</h3>
+      <p style="font-size: large">
+        <strong
+          ><span style="font-size: x-large; color: #123870">Hover</span></strong
+        >
+        over any part of the bar chart and line graph to show more details.
+        <br />
+        Use the menu in
+        <strong
+          ><span style="font-size: x-large; color: #123870"
+            >top left corner</span
+          ></strong
+        >
+        to see <strong style="color: #123870">Major</strong> specific data.
+      </p>
     </div>
+  </div>
 
   <!-- row for stacked bar chart tabs -->
   <section class="row justify-content-center">
     <div class="col-lg-8 col-md-12 col-sm-12">
       <ul class="nav nav-tabs tabs-main">
         <li class="nav-item">
-          <a [class]="'nav-link' + (showUndergrad ? ' active' : '')" (click)="toggleGraph(true)">Undergraduate</a>
+          <a
+            [class]="'nav-link' + (showUndergrad ? ' active' : '')"
+            (click)="toggleGraph(true)"
+            >Undergraduate</a
+          >
         </li>
         <li class="nav-item">
-          <a [class]="'nav-link' + (!showUndergrad ? ' active' : '')" (click)="toggleGraph(false)">Graduate / Professional Programs</a>
+          <a
+            [class]="'nav-link' + (!showUndergrad ? ' active' : '')"
+            (click)="toggleGraph(false)"
+            >Graduate / Professional Programs</a
+          >
         </li>
       </ul>
-      <br>
+      <br />
     </div>
   </section>
 
   <!-- legend section -->
   <section class="justify-content-center">
-    <h3 style="text-align: center;">Overall Demographics by College</h3>
-    <p *ngIf="!showUndergrad" class="text-muted" style="font-size: 0.7rem;">* Note: Graduate and Professional degrees within the same colleges are combined in the same bar.</p>
+    <h3 style="text-align: center">Overall Demographics by College</h3>
+    <p *ngIf="!showUndergrad" class="text-muted" style="font-size: 0.7rem">
+      * Note: Graduate and Professional degrees within the same colleges are
+      combined in the same bar.
+    </p>
     <div class="col-12">
       <div id="legend-container" class="svg-container"></div>
     </div>
   </section>
 
-
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center">
-    <div class="col-12" >
+    <div class="col-12">
       <div id="container" class="svg-container"></div>
     </div>
   </section>
 
-
   <!-- line graphs -->
-  <app-line-summary [showUndergrad]="true" [showLocation]="false"></app-line-summary>
-  <app-line-summary [showUndergrad]="false" [showLocation]="false"></app-line-summary>
-  <app-line-summary [showUndergrad]="true" [showLocation]="true"></app-line-summary>
-  <app-line-summary [showUndergrad]="false" [showLocation]="true"></app-line-summary>
+  <app-line-summary
+    [showUndergrad]="true"
+    [showLocation]="false"
+  ></app-line-summary>
+  <app-line-summary
+    [showUndergrad]="false"
+    [showLocation]="false"
+  ></app-line-summary>
+  <app-line-summary
+    [showUndergrad]="true"
+    [showLocation]="true"
+  ></app-line-summary>
+  <app-line-summary
+    [showUndergrad]="false"
+    [showLocation]="true"
+  ></app-line-summary>
 </div>

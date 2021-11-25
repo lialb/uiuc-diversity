@@ -16,16 +16,20 @@
     <div class="col-lg-8 col-md-12 col-sm-12">
       <ul class="nav nav-tabs">
         <li class="nav-item" *ngIf="showUndergrad">
-          <a [class]="'nav-link' + (level === 'undergrad' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
+          <a [class]="'nav-link' + (level === 'undergrad' ? ' active' : '')"
+            [routerLink]="['/college', collegeAbbreviation, 'undergrad']">Undergraduate</a>
         </li>
         <li class="nav-item" *ngIf="showMasters">
-          <a [class]="'nav-link' + (level === 'masters' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'masters']">Masters</a>
+          <a [class]="'nav-link' + (level === 'masters' ? ' active' : '')"
+            [routerLink]="['/college', collegeAbbreviation, 'masters']">Masters</a>
         </li>
         <li class="nav-item" *ngIf="showDoctorate">
-          <a [class]="'nav-link' + (level === 'doctorate' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'doctorate']">Doctorate</a>
+          <a [class]="'nav-link' + (level === 'doctorate' ? ' active' : '')"
+            [routerLink]="['/college', collegeAbbreviation, 'doctorate']">Doctorate</a>
         </li>
         <li class="nav-item" *ngIf="showNondegree">
-          <a [class]="'nav-link' + (level === 'nondegree' ? ' active' : '')" [routerLink]="['/college', collegeAbbreviation, 'nondegree']">Non-Degree</a>
+          <a [class]="'nav-link' + (level === 'nondegree' ? ' active' : '')"
+            [routerLink]="['/college', collegeAbbreviation, 'nondegree']">Non-Degree</a>
         </li>
       </ul>
       <br>
@@ -35,8 +39,11 @@
   <!-- note section for MS and Non-degrees -->
   <section class="row justify-content-center">
     <div class="col-lg-8 col-md-12 col-sm-12">
-      <p *ngIf="level === 'masters'" class="text-muted" style="font-size: 0.7rem;">* Note: Masters (e.g. MS, MCS, MEng) are combined in each major</p>
-      <p *ngIf="level === 'nondegree'" class="text-muted" style="font-size: 0.7rem;">* Note: NonDegree students include undergraduate programs that transfer to a degree-seeking program (e.g. Engineering Undeclared -> CompE) and students taking undergraduate courses for credit at another institution (may include high school).</p>
+      <p *ngIf="level === 'masters'" class="text-muted" style="font-size: 0.7rem;">* Note: Masters (e.g. MS, MCS, MEng)
+        are combined in each major</p>
+      <p *ngIf="level === 'nondegree'" class="text-muted" style="font-size: 0.7rem;">* Note: NonDegree students include
+        undergraduate programs that transfer to a degree-seeking program (e.g. Engineering Undeclared -> CompE) and
+        students taking undergraduate courses for credit at another institution (may include high school).</p>
     </div>
   </section>
 
@@ -49,7 +56,7 @@
 
   <!-- the section where the main bar chart is drawn -->
   <section class="row justify-content-center" style="margin-top: -3%;">
-    <div class="col-12" >
+    <div class="col-12">
       <div id="container" class="svg-container"></div>
     </div>
   </section>
@@ -62,13 +69,14 @@
   </section>
 
   <!-- pie chart section -->
-  <app-piechart *ngIf="showPieChart" [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation"></app-piechart>
-  
-  <!-- major history section -->
-  <app-line-college *ngIf="showPieChart" [showLocation]="false" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+  <app-piechart *ngIf="showPieChart" [pieData]="piechartData" [level]="level" [college]="collegeAbbreviation">
+  </app-piechart>
 
-  <app-line-college *ngIf="showPieChart" [showLocation]="true" [level]="level" [lineChoice]="collegeCode" [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+  <!-- major history section -->
+  <app-line-college *ngIf="showPieChart" [showLocation]="false" [level]="level" [lineChoice]="collegeCode"
+    [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
+
+  <app-line-college *ngIf="showPieChart" [showLocation]="true" [level]="level" [lineChoice]="collegeCode"
+    [majorCode]="majorCode" [majorName]="majorName"></app-line-college>
 
 </div>
-
-

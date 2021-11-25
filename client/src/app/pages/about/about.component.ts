@@ -22,9 +22,8 @@ export class AboutComponent implements OnInit {
       "github": "https://github.com/tianyiz8",
     }];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

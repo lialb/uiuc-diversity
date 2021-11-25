@@ -1,7 +1,6 @@
-$UIUCOrange: #E84A26;
+$UIUCOrange: #e84a26;
 $UIUCBlue: #123870;
-//#13294A;
-/* The sidebar menu */
+
 .sidebar {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
@@ -38,22 +37,26 @@ $UIUCBlue: #123870;
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  transition: margin-left .5s; /* If you want a transition effect */
+  transition: margin-left 0.5s; /* If you want a transition effect */
   padding: 1rem;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
 }
 
-$skyblue: #328CC1;
+$skyblue: #328cc1;
 
 .college-button {
   background-color: transparent;
   border: none;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   border-color: none;
   text-align: center;
   text-decoration: none;
@@ -70,5 +73,3 @@ $skyblue: #328CC1;
 .college-button:hover {
   color: $UIUCOrange;
 }
-
-
